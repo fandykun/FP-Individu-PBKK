@@ -1,6 +1,6 @@
 <?php
 
-namespace Its\Example\Dashboard;
+namespace Kun\Dashboard;
 
 use Phalcon\Di\DiInterface;
 use Phalcon\Loader;
@@ -14,19 +14,19 @@ class Module implements ModuleDefinitionInterface
 
         $loader->registerNamespaces([
 
-            'Its\Example\Dashboard\Core\Domain\Event' => __DIR__ . '/Core/Domain/Event',
-            'Its\Example\Dashboard\Core\Domain\Model' => __DIR__ . '/Core/Domain/Model',
-            'Its\Example\Dashboard\Core\Domain\Repository' => __DIR__ . '/Core/Domain/Repository',
-            'Its\Example\Dashboard\Core\Domain\Service' => __DIR__ . '/Core/Domain/Service',
+            'Kun\Dashboard\Core\Domain\Event' => __DIR__ . '/Core/Domain/Event',
+            'Kun\Dashboard\Core\Domain\Model' => __DIR__ . '/Core/Domain/Model',
+            'Kun\Dashboard\Core\Domain\Repository' => __DIR__ . '/Core/Domain/Repository',
+            'Kun\Dashboard\Core\Domain\Service' => __DIR__ . '/Core/Domain/Service',
 
-            'Its\Example\Dashboard\Core\Application\Service' => __DIR__ . '/Core/Application/Service',
-            'Its\Example\Dashboard\Core\Application\EventSubscriber' => __DIR__ . '/Core/Application/EventSubscriber',
+            'Kun\Dashboard\Core\Application\Service' => __DIR__ . '/Core/Application/Service',
+            'Kun\Dashboard\Core\Application\EventSubscriber' => __DIR__ . '/Core/Application/EventSubscriber',
 
-            'Its\Example\Dashboard\Infrastructure\Persistence' => __DIR__ . '/Core/Infrastructure/Persistence',
+            'Kun\Dashboard\Infrastructure\Persistence' => __DIR__ . '/Core/Infrastructure/Persistence',
 
-            'Its\Example\Dashboard\Presentation\Web\Controller' => __DIR__ . '/Presentation/Web/Controller',
-            'Its\Example\Dashboard\Presentation\Web\Validator' => __DIR__ . '/Presentation/Web/Validator',
-            'Its\Example\Dashboard\Presentation\Api\Controller' => __DIR__ . '/Presentation/Api/Controller',
+            'Kun\Dashboard\Presentation\Web\Controller' => __DIR__ . '/Presentation/Web/Controller',
+            'Kun\Dashboard\Presentation\Web\Validator' => __DIR__ . '/Presentation/Web/Validator',
+            'Kun\Dashboard\Presentation\Api\Controller' => __DIR__ . '/Presentation/Api/Controller',
             
         ]);
 

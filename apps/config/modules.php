@@ -2,10 +2,10 @@
 
 return array(
     'dashboard' => [
-        'namespace' => 'Its\Example\Dashboard',
-        'webControllerNamespace' => 'Its\Example\Dashboard\Presentation\Web\Controller',
+        'namespace' => 'Kun\Dashboard',
+        'webControllerNamespace' => 'Kun\Dashboard\Presentation\Web\Controller',
         'apiControllerNamespace' => '',
-        'className' => 'Its\Example\Dashboard\Module',
+        'className' => 'Kun\Dashboard\Module',
         'path' => APP_PATH . '/modules/dashboard/Module.php',
         'defaultRouting' => true,
         'defaultController' => 'index',
