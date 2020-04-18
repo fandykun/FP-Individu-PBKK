@@ -22,7 +22,7 @@ class Module implements ModuleDefinitionInterface
             'Kun\Dashboard\Core\Application\Service' => __DIR__ . '/Core/Application/Service',
             'Kun\Dashboard\Core\Application\EventSubscriber' => __DIR__ . '/Core/Application/EventSubscriber',
 
-            'Kun\Dashboard\Infrastructure\Persistence' => __DIR__ . '/Core/Infrastructure/Persistence',
+            'Kun\Dashboard\Infrastructure\Persistence' => __DIR__ . '/Infrastructure/Persistence',
 
             'Kun\Dashboard\Presentation\Web\Controller' => __DIR__ . '/Presentation/Web/Controller',
             'Kun\Dashboard\Presentation\Web\Validator' => __DIR__ . '/Presentation/Web/Validator',
@@ -40,5 +40,7 @@ class Module implements ModuleDefinitionInterface
         $di->get('config')->merge($moduleConfig);
 
         include_once __DIR__ . '/config/services.php';
+        include_once __DIR__ . '/config/repository.php';
+        include_once __DIR__ . '/config/usecase.php';
     }
 }
