@@ -9,4 +9,12 @@ $router->addGet('/dashboard/user', [
     'action' => 'index'
 ]);
 
+$router->addPost('/dashboard/user/add', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'user',
+    'action' => 'add'
+]);
+
+
 return $router;

@@ -2,6 +2,7 @@
 
 namespace Kun\Dashboard\Core\Application\Service\FindUserById;
 
+use Kun\Dashboard\Core\Domain\Model\UserId;
 use Kun\Dashboard\Core\Domain\Repository\UserRepositoryInterface;
 
 class FindUserByIdService {
@@ -14,9 +15,9 @@ class FindUserByIdService {
     public function handle(FindUserByIdRequest $request) {
         try {
             $userId = $request->getUserId();
-            $user = $this->userRepository->findUserById($userId);
+            $user = $this->userRepository->findUserById(new UserId($userId));
+            return new FindUserByIdResponse($user);
 
-            return $user;
         } catch (\Exception $e) {
             throw $e;
         }
