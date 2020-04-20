@@ -2,18 +2,22 @@
 
 namespace Kun\Dashboard\Core\Domain\Model;
 
-class Password {
-    protected $password;
+class Password 
+{
+	private string $password;
 
-    public function __construct($password){
-        $this->password = $password;
-    }
+	public function __construct($password)
+	{
+		$this->password = $password;
+	}
 
-    public function toString(){
-        return $this->password;
-    }
+	public function toString()
+	{
+		return $this->password;
+	}
 
-    public function isCorrect(Password $password) {
-        return $this->password === $password->toString();
-    }
+	public function isCorrect(Password $password) : bool
+	{
+		return $this->password === $password->toString();
+	}
 }

@@ -3,13 +3,15 @@
 namespace Kun\Dashboard\Core\Application\Service\FindUserById;
 
 class FindUserByIdRequest {
-    protected $userId;
+	protected string $userId;
 
-    public function __construct($userId) {
-        $this->userId = $userId;
-    }
+	public function __construct(string $userId) 
+	{
+		$this->userId = $userId;
+	}
 
-    public function getUserId() {
-        return $this->userId;
-    }
+	public function getUserId() 
+	{
+		return $this->userId;
+	}
 }

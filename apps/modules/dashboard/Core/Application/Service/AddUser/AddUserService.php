@@ -8,31 +8,34 @@ use Kun\Dashboard\Core\Domain\Model\User;
 use Kun\Dashboard\Core\Domain\Model\UserId;
 use Kun\Dashboard\Core\Domain\Repository\UserRepositoryInterface;
 
-class AddUserService {
-    protected $userRepository;
+class AddUserService 
+{
+	protected UserRepositoryInterface $userRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository){
-        $this->userRepository = $userRepository;
-    }
+	public function __construct(UserRepositoryInterface $userRepository)
+	{
+		$this->userRepository = $userRepository;
+	}
 
-    public function handle(AddUserRequest $request) {
-        try {
-            $user = new User(
-                new UserId(),
-                $request->getUsername(),
-                $request->getEmail(),
-                new Password($request->getPassword()),
-                $request->getRole()
-            );
+	public function execute(AddUserRequest $request) 
+	{
+		try {
+			$user = new User(
+				new UserId(),
+				$request->getUsername(),
+				$request->getEmail(),
+				new Password($request->getPassword()),
+				$request->getRole()
+			);
 
-            $result = $this->userRepository->addUser($user);
+			$result = $this->userRepository->addUser($user);
 
-            if(!$result) {
-                throw new Exception('unable to add user');
-            }
+			if(!$result) {
+				throw new Exception('unable to add user');
+			}
 
-        } catch (\Exception $e) {
-            throw $e;
-        }
-    }
+		} catch (\Exception $e) {
+			throw $e->getMessage();
+		}
+	}
 }

@@ -7,7 +7,7 @@ return array(
         'apiControllerNamespace' => '',
         'className' => 'Kun\Dashboard\Module',
         'path' => APP_PATH . '/modules/dashboard/Module.php',
-        'defaultRouting' => true,
+        'defaultRouting' => false,
         'defaultController' => 'index',
         'defaultAction' => 'index'
     ],

@@ -6,7 +6,7 @@ use Ramsey\Uuid\Uuid;
 
 class UserId
 {
-    private $id;
+    private string $id;
 
     public function __construct($id = null)
     {
@@ -18,7 +18,7 @@ class UserId
         return $this->id;
     }
 
-    public function equals(UserId $userId)
+    public function isEqual(UserId $userId) : bool
     {
         return $this->id === $userId->id;
     }

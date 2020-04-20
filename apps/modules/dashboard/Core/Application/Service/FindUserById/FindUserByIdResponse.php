@@ -3,13 +3,15 @@
 namespace Kun\Dashboard\Core\Application\Service\FindUserById;
 
 class FindUserByIdResponse {
-    protected $data;
+	protected $data;
 
-    public function __construct($data) {
-        $this->data = $data;
-    }
+	public function __construct($data) 
+	{
+		$this->data = $data;
+	}
 
-    public function getData() {
-        return $this->data;
-    }
+	public function getData() 
+	{
+		return $this->data;
+	}
 }

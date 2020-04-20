@@ -2,14 +2,16 @@
 
 namespace Kun\Dashboard\Core\Domain\Model;
 
-class User {
-    private $userId;
-    private $username;
-    private $email;
-    private $password;
-    private $role;
+class User
+{
+	private UserId $userId;
+	private string $username;
+	private string $email;
+	private Password $password;
+	private int $role;
 
-	public function __construct(UserId $userId, $username, $email, Password $password, $role = 0){
+	public function __construct(UserId $userId, $username, $email, Password $password, $role = 0)
+	{
 		$this->userId = $userId;
 		$this->username = $username;
 		$this->email = $email;
@@ -17,43 +19,53 @@ class User {
 		$this->role = $role;
 	}
 
-    public function getUserId(){
+	public function getUserId()
+	{
 		return $this->userId;
 	}
 
-	public function setUserId($userId){
+	public function setUserId($userId)
+	{
 		$this->userId = $userId;
 	}
 
-	public function getUsername(){
+	public function getUsername()
+	{
 		return $this->username;
 	}
 
-	public function setUsername($username){
+	public function setUsername($username)
+	{
 		$this->username = $username;
 	}
 
-	public function getEmail(){
+	public function getEmail()
+	{
 		return $this->email;
 	}
 
-	public function setEmail($email){
+	public function setEmail($email)
+	{
 		$this->email = $email;
 	}
 
-	public function getPassword(){
+	public function getPassword()
+	{
 		return $this->password;
 	}
 
-	public function setPassword($password){
+	public function setPassword($password)
+	{
 		$this->password = $password;
 	}
 
-	public function getRole(){
+	public function getRole()
+	{
 		return $this->role;
 	}
 
-	public function setRole($role){
+	public function setRole($role)
+	{
 		$this->role = $role;
     }
 }

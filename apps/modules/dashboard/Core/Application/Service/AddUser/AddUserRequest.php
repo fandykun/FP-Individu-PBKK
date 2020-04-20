@@ -2,48 +2,65 @@
 
 namespace Kun\Dashboard\Core\Application\Service\AddUser;
 
-class AddUserRequest {
-    protected $username;
-    protected $email;
-    protected $password;
-    protected $role;
+use Kun\Dashboard\Core\Domain\Model\Password;
 
-    public function __construct($username, $email, $password, $role){
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
-        $this->role = $role;
-    }
+class AddUserRequest 
+{
+	protected string $username;
+	protected string $email;
+	protected Password $password;
+	protected int $role;
 
-	public function getUsername(){
+	public function __construct(
+		string $username, 
+		string $email, 
+		Password $password, 
+		int $role
+	)
+	{
+		$this->username = $username;
+		$this->email = $email;
+		$this->password = $password;
+		$this->role = $role;
+	}
+
+	public function getUsername()
+	{
 		return $this->username;
 	}
 
-	public function setUsername($username){
+	public function setUsername($username)
+	{
 		$this->username = $username;
 	}
 
-	public function getEmail(){
+	public function getEmail()
+	{
 		return $this->email;
 	}
 
-	public function setEmail($email){
+	public function setEmail($email)
+	{
 		$this->email = $email;
 	}
 
-	public function getPassword(){
+	public function getPassword()
+	{
 		return $this->password;
 	}
 
-	public function setPassword($password){
+	public function setPassword($password)
+	{
 		$this->password = $password;
 	}
 
-	public function getRole(){
+	public function getRole()
+	{
 		return $this->role;
 	}
 
-	public function setRole($role){
+	public function setRole($role)
+	{
 		$this->role = $role;
-    }
+	}
 }

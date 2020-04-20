@@ -10,28 +10,25 @@ use Phalcon\Mvc\Controller;
 
 class UserController extends Controller
 {
-    /**
-     * @var FindUserByIdService
-     */
-    protected $findUserByIdService;
-    
-    /**
-     * @var AddUserService
-     */
-    protected $addUserService;
+    protected FindUserByIdService $findUserByIdService;
 
-    public function initialize() {
+    protected AddUserService $addUserService;
+
+    public function initialize() 
+    {
         $this->findUserByIdService = $this->getDI()->get('findUserByIdService');
         $this->addUserService = $this->getDI()->get('addUserService');
     }
 
-    public function indexAction() {
-        $response = $this->findUserByIdService->handle(new FindUserByIdRequest('8f10a384-5693-4958-a8cc-2dd446cf87ba'));
+    public function indexAction()
+    {
+        $response = $this->findUserByIdService->execute(new FindUserByIdRequest('8f10a384-5693-4958-a8cc-2dd446cf87ba'));
         $this->view->setVar('user', $response->getData());
         return $this->view->pick('home');
     }
 
-    public function addAction() {
+    public function addAction()
+    {
         $username = $this->request->getPost('username');
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
@@ -39,7 +36,7 @@ class UserController extends Controller
 
         $request = new AddUserRequest($username, $email, $password, $role);
         try {
-            $this->addUserService->handle($request);
+            $this->addUserService->execute($request);
             var_dump('ok');
         } catch (\Exception $e) {
             var_dump($e->getMessage());
@@ -47,7 +44,8 @@ class UserController extends Controller
 
     }
 
-    public function removeAction(){
+    public function removeAction()
+    {
 
     }
 }
