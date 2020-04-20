@@ -8,13 +8,13 @@ class AddUserRequest
 {
 	protected string $username;
 	protected string $email;
-	protected Password $password;
+	protected string $password;
 	protected int $role;
 
 	public function __construct(
 		string $username, 
 		string $email, 
-		Password $password, 
+		string $password, 
 		int $role
 	)
 	{
