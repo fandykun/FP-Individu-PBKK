@@ -1,6 +1,8 @@
 <?php
 
-use Phalcon\Session\Adapter\Files as Session;
+// use Phalcon\Session\Adapter\Files as Session;
+use Phalcon\Session\Manager as Session;
+use Phalcon\Session\Adapter\Stream;
 use Phalcon\Security;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Events\Event;
@@ -17,6 +19,12 @@ $container['config'] = function() use ($config) {
 
 $container->setShared('session', function() {
     $session = new Session();
+    $files = new Stream(
+        [
+            'savePath' => '/tmp',
+        ]
+    );
+    $session->setAdapter($files);
 	$session->start();
 
 	return $session;
@@ -108,7 +116,8 @@ $container->set(
 $container->set(
     'flash',
     function () {
-        $flash = new FlashDirect(
+        $flash = new FlashDirect();
+        $flash->setCssClasses(            
             [
                 'error'   => 'alert alert-danger',
                 'success' => 'alert alert-success',
@@ -124,7 +133,8 @@ $container->set(
 $container->set(
     'flashSession',
     function () {
-        $flash = new FlashSession(
+        $flash = new FlashSession();
+        $flash->setCssClasses(
             [
                 'error'   => 'alert alert-danger',
                 'success' => 'alert alert-success',
