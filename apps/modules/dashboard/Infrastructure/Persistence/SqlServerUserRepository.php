@@ -59,7 +59,7 @@ class SqlServerUserRepository implements UserRepositoryInterface
 		
 	}
 
-	public function findUserByKey($key) : ?User
+	public function LoginUser(string $key, string $password) : ?User
 	{
 		$sql = "SELECT * from users WHERE username=:username OR email=:email";
 		$param = [
@@ -69,17 +69,20 @@ class SqlServerUserRepository implements UserRepositoryInterface
 
 		$result = $this->db->fetchOne($sql, \Phalcon\Db\Enum::FETCH_ASSOC, $param);
 
+		// If data found
 		if($result) {
-			$password = new Password($result['password']);
 			$user = new User(
 				new UserId($result['user_id']),
 				$result['username'],
 				$result['email'],
-				$password,
+				new Password($result['password']),
 				$result['role']
 			);
 
-			return $user;
+			// Check password from input
+			if($user->getPassword()->isCorrect($password)) {
+				return $user;
+			}
 		}
 
 		return null;

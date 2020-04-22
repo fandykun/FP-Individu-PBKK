@@ -1,10 +1,10 @@
 <?php
 
-namespace Kun\Dashboard\Core\Application\Service\FindUserByKey;
+namespace Kun\Dashboard\Core\Application\Service\LoginUser;
 
 use Kun\Dashboard\Core\Domain\Model\User;
 
-class FindUserByKeyResponse 
+class LoginUserResponse 
 {
 	protected $data;
 

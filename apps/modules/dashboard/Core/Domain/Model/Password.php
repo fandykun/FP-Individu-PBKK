@@ -4,20 +4,23 @@ namespace Kun\Dashboard\Core\Domain\Model;
 
 class Password 
 {
-	private string $password;
+	/**
+	 * @var string
+	 */
+	private $hashedPassword;
 
-	public function __construct($password)
+	public function __construct($hashedPassword)
 	{
-		$this->password = $password;
+		$this->hashedPassword = $hashedPassword;
 	}
 
 	public function toString()
 	{
-		return $this->password;
+		return $this->hashedPassword;
 	}
 
-	public function isCorrect(Password $password) : bool
+	public function isCorrect(string $password) : bool
 	{
-		return $this->password === $password->toString();
+		return password_verify($password, $this->hashedPassword);
 	}
 }

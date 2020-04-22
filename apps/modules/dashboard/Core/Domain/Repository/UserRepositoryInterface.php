@@ -11,7 +11,7 @@ interface UserRepositoryInterface
 
     public function findUserById(UserId $id) : ?User;
 
-    public function findUserByKey($key) : ?User;
+    public function LoginUser(string $key, string $password) : ?User;
 
     public function updateUser(User $user) : User;
 

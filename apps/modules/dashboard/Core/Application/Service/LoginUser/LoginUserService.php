@@ -1,10 +1,10 @@
 <?php
 
-namespace Kun\Dashboard\Core\Application\Service\FindUserByKey;
+namespace Kun\Dashboard\Core\Application\Service\LoginUser;
 
 use Kun\Dashboard\Core\Domain\Repository\UserRepositoryInterface;
 
-class FindUserByKeyService 
+class LoginUserService 
 {
 	protected UserRepositoryInterface $userRepository;
 
@@ -13,11 +13,12 @@ class FindUserByKeyService
 		$this->userRepository = $userRepository;
 	}
 
-	public function execute(FindUserByKeyRequest $request)
+	public function execute(LoginUserRequest $request)
 	{
 		try {
 			$keyValue = $request->getKeyValue();
-			$user = $this->userRepository->findUserByKey($keyValue);
+			$password = $request->getPassword();
+			$user = $this->userRepository->LoginUser($keyValue, $password);
 
 			if(!isset($user)) {
 				throw new \Exception("user not found");
@@ -27,6 +28,6 @@ class FindUserByKeyService
 			throw $e;
 		}
 
-		return new FindUserByKeyResponse($user);
+		return new LoginUserResponse($user);
 	}
 }
