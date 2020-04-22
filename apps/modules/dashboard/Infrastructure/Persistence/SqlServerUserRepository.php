@@ -22,7 +22,7 @@ class SqlServerUserRepository implements UserRepositoryInterface
 	public function addUser(User $user)
 	{
 		$sql = "INSERT INTO users (user_id, username, email, password, [role]) VALUES(:user_id, :username, :email, :password, :role)";
-		$param = [
+		$params = [
 			'user_id' => $user->getUserId()->id(),
 			'username' => $user->getUsername(),
 			'email' => $user->getEmail(),
@@ -30,7 +30,7 @@ class SqlServerUserRepository implements UserRepositoryInterface
 			'role' => $user->getRole()
 		];
 
-		$result = $this->db->execute($sql, $param);
+		$result = $this->db->execute($sql, $params);
 
 		return $result;
 	}

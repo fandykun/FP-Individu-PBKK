@@ -2,8 +2,6 @@
 
 namespace Kun\Dashboard\Core\Application\Service\AddUser;
 
-use Kun\Dashboard\Core\Domain\Model\Password;
-
 class AddUserRequest 
 {
 	protected string $username;

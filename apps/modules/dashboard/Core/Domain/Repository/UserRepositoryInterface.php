@@ -7,14 +7,13 @@ use Kun\Dashboard\Core\Domain\Model\UserId;
 
 interface UserRepositoryInterface 
 {
-    public function addUser(User $user);
+	public function addUser(User $user);
 
-    public function findUserById(UserId $id) : ?User;
+	public function findUserById(UserId $id) : ?User;
 
-    public function LoginUser(string $key, string $password) : ?User;
+	public function LoginUser(string $key, string $password) : ?User;
 
-    public function updateUser(User $user) : User;
+	public function updateUser(User $user) : User;
 
-    public function deleteUser(UserId $id);
-
+	public function deleteUser(UserId $id);
 }
