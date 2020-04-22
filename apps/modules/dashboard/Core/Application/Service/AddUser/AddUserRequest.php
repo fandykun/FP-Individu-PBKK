@@ -15,7 +15,7 @@ class AddUserRequest
 		string $username, 
 		string $email, 
 		string $password, 
-		int $role
+		int $role = 0
 	)
 	{
 		$this->username = $username;

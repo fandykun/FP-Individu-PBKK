@@ -2,10 +2,11 @@
 
 namespace Kun\Dashboard\Core\Application\Service\FindUserById;
 
-class FindUserByIdResponse {
+class FindUserByIdResponse 
+{
 	protected $data;
 
-	public function __construct($data) 
+	public function __construct($data)
 	{
 		$this->data = $data;
 	}

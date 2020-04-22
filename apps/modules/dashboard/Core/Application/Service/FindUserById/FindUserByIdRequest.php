@@ -2,7 +2,8 @@
 
 namespace Kun\Dashboard\Core\Application\Service\FindUserById;
 
-class FindUserByIdRequest {
+class FindUserByIdRequest 
+{
 	protected string $userId;
 
 	public function __construct(string $userId) 

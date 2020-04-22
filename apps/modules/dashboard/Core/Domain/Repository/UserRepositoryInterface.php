@@ -9,7 +9,9 @@ interface UserRepositoryInterface
 {
     public function addUser(User $user);
 
-    public function findUserById(UserId $id) : User;
+    public function findUserById(UserId $id) : ?User;
+
+    public function findUserByKey($key) : ?User;
 
     public function updateUser(User $user) : User;
 

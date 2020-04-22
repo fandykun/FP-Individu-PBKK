@@ -1,11 +1,10 @@
 <?php
 
-namespace Kun\Dashboard\Core\Application\Service\FindUserById;
+namespace Kun\Dashboard\Core\Application\Service\FindUserByKey;
 
-use Kun\Dashboard\Core\Domain\Model\UserId;
 use Kun\Dashboard\Core\Domain\Repository\UserRepositoryInterface;
 
-class FindUserByIdService 
+class FindUserByKeyService 
 {
 	protected UserRepositoryInterface $userRepository;
 
@@ -14,11 +13,11 @@ class FindUserByIdService
 		$this->userRepository = $userRepository;
 	}
 
-	public function execute(FindUserByIdRequest $request)
+	public function execute(FindUserByKeyRequest $request)
 	{
 		try {
-			$userId = $request->getUserId();
-			$user = $this->userRepository->findUserById(new UserId($userId));
+			$keyValue = $request->getKeyValue();
+			$user = $this->userRepository->findUserByKey($keyValue);
 
 			if(!isset($user)) {
 				throw new \Exception("user not found");
@@ -28,6 +27,6 @@ class FindUserByIdService
 			throw $e;
 		}
 
-		return new FindUserByIdResponse($user);
+		return new FindUserByKeyResponse($user);
 	}
 }

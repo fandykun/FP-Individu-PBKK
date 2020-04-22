@@ -5,9 +5,13 @@ namespace Kun\Dashboard\Core\Domain\Model;
 class User
 {
 	private UserId $userId;
+
 	private string $username;
+
 	private string $email;
+
 	private Password $password;
+
 	private int $role;
 
 	public function __construct(UserId $userId, $username, $email, Password $password, $role = 0)
