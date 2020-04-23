@@ -20,9 +20,11 @@ class IndexController extends Controller
         // $result = $db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
 
         // echo var_dump($result);
-        $hash = password_hash('fandykun', PASSWORD_BCRYPT);
-        var_dump($hash);
-        $hashed = password_hash('fandykun', PASSWORD_BCRYPT);
-        var_dump($hashed); die();
+
+        $this->dispatcher->forward([
+            'controller' => 'announcement',
+            'action'     => 'getLastAnnouncement',
+        ]);
+        return;
     }
 }

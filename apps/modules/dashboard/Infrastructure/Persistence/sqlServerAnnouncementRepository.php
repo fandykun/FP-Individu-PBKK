@@ -13,7 +13,7 @@ class sqlServerAnnouncementRepository implements AnnouncementRepositoryInterface
 	 */
 	protected $db;
 
-	public function __construct($db) 
+	public function __construct($db)
 	{
 		$this->db = $db;
 	}
@@ -35,8 +35,8 @@ class sqlServerAnnouncementRepository implements AnnouncementRepositoryInterface
 
 	public function getLastAnnouncement() : ?Announcement
 	{
-		$sql = "SELECT * FROM announcements ORDER BY timestamp";
-		
+		$sql = "SELECT * FROM announcements ORDER BY timestamp DESC";
+
 		$result = $this->db->fetchOne($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
 
 		if($result) {
