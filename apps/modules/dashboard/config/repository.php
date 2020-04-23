@@ -1,6 +1,6 @@
 <?php
 
-use Kun\Dashboard\Infrastructure\Persistence\sqlServerAnnouncementRepository;
+use Kun\Dashboard\Infrastructure\Persistence\SqlServerAnnouncementRepository;
 use Kun\Dashboard\Infrastructure\Persistence\SqlServerUserRepository;
 
 $di->set('sqlServerUserRepository', function() use ($di) {
@@ -8,5 +8,5 @@ $di->set('sqlServerUserRepository', function() use ($di) {
 });
 
 $di->set('sqlServerAnnouncementRepository', function() use ($di) {
-    return new sqlServerAnnouncementRepository($di->get('db'));
+    return new SqlServerAnnouncementRepository($di->get('db'));
 });

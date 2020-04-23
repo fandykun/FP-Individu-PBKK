@@ -6,7 +6,7 @@ use Kun\Dashboard\Core\Domain\Model\Announcement;
 use Kun\Dashboard\Core\Domain\Model\AnnouncementId;
 use Kun\Dashboard\Core\Domain\Repository\AnnouncementRepositoryInterface;
 
-class sqlServerAnnouncementRepository implements AnnouncementRepositoryInterface
+class SqlServerAnnouncementRepository implements AnnouncementRepositoryInterface
 {
 	/**
 	 * @var \Phalcon\Db\Adapter\AbstractAdapter
