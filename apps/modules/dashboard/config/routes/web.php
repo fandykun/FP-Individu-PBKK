@@ -2,6 +2,10 @@
 
 $namespace = 'Kun\Dashboard\Presentation\Web\Controller';
 
+/**
+ * @var \Phalcon\Mvc\Router $router
+ */
+
 $router->addGet('/dashboard', [
     'namespace' => $namespace,
     'module' => 'dashboard',
@@ -16,6 +20,9 @@ $router->addPost('/dashboard/user/add', [
     'action' => 'add'
 ]);
 
+//=========
+//-----Auth
+//=========
 $router->addGet('/register', [
     'namespace' => $namespace,
     'module' => 'dashboard',
@@ -49,6 +56,16 @@ $router->addPost('/logout/submit', [
     'module' => 'dashboard',
     'controller' => 'auth',
     'action' => 'logout'
+]);
+
+//=================
+//-----Announcement
+//=================
+$router->addPost('/admin/announcement/add', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'announcement',
+    'action' => 'add'
 ]);
 
 // return $router;
