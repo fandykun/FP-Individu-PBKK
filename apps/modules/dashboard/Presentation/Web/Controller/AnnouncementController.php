@@ -32,6 +32,10 @@ class AnnouncementController extends BaseController
 		$title = $this->request->getPost('title');
 		$content = $this->request->getPost('content');
 
+		if($title == '' || $content == '') {
+			throw new \Exception("Unable to add announcement");
+		}
+
 		try {
 			$request = new AddAnnouncementRequest($title, $content);
 			$this->addAnnouncementService->execute($request);

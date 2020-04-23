@@ -17,10 +17,6 @@ class AddAnnouncementService
 
 	public function execute(AddAnnouncementRequest $request)
 	{
-		if($request->getTitle() == '' || $request->getContent() == '') {
-			throw new \Exception("Unable to add announcement");
-		}
-		
 		try {
 			$announcement = new Announcement(
 				new AnnouncementId(),

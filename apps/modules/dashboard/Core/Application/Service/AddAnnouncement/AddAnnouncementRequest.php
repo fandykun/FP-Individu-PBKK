@@ -4,11 +4,11 @@ namespace Kun\Dashboard\Core\Application\Service\AddAnnouncement;
 
 class AddAnnouncementRequest
 {
-	protected ?string $title;
+	protected string $title;
 
-	protected ?string $content;
+	protected string $content;
 
-	public function __construct(?string $title, ?string $content)
+	public function __construct(string $title, string $content)
 	{
 		$this->title = $title;
 		$this->content = $content;
