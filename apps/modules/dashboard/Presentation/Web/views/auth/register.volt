@@ -13,7 +13,7 @@
     <i class="zmdi zmdi-font"></i>
   </span>
   <p>{{ this.flashSession.output() }}</p>
-  <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+  <div class="wrap-input100 validate-input" data-validate = "Masukkan username">
     <input type="text" name="username" class="input100">
     <span class="focus-input100" data-placeholder="Username"></span>
   </div>
@@ -46,7 +46,7 @@
     </span>
 
     <a class="txt2" href="#">
-      Login
+      Login disini
     </a>
   </div>
 </form>

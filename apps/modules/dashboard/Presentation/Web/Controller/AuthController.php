@@ -137,10 +137,6 @@ class AuthController extends BaseController
 			$this->flashSession->error("Logout Gagal");
 		}
 
-		$this->dispatcher->forward([
-			'controller' => 'user',
-			'action'     => 'index',
-		]);
-		return;
+		$this->response->redirect('/');
 	}
 }

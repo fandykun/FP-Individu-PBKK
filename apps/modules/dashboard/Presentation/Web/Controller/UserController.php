@@ -15,6 +15,7 @@ class UserController extends BaseController
 
 	public function initialize() 
 	{
+		$this->setAnnouncementView();
 		$this->findUserByIdService = $this->getDI()->get('findUserByIdService');
 		$this->addUserService = $this->getDI()->get('addUserService');
 	}

@@ -2,29 +2,15 @@
 
 namespace Kun\Dashboard\Presentation\Web\Controller;
 
-use Phalcon\Mvc\Controller;
-
-class IndexController extends Controller
+class IndexController extends BaseController
 {
-    /**
-     * Action ini
-     * Untuk sementara dibuat coba-coba 
-     * karena masih learning by doing
-     */
-    public function indexAction()
-    {
-        // $db = $this->getDI()->get('db');
+	public function initialize()
+	{
+		$this->setAnnouncementView();
+	}
 
-        // $sql = "SELECT * from users";
-
-        // $result = $db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
-
-        // echo var_dump($result);
-
-        $this->dispatcher->forward([
-            'controller' => 'announcement',
-            'action'     => 'getLastAnnouncement',
-        ]);
-        return;
-    }
+	public function indexAction()
+	{
+		$this->view->pick('home');
+	}
 }

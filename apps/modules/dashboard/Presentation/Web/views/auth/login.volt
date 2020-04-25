@@ -41,7 +41,7 @@
     </span>
 
     <a class="txt2" href="#">
-      Daftar
+      Daftar disini
     </a>
   </div>
 </form>

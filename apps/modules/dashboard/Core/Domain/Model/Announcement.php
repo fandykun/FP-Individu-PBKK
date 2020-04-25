@@ -2,6 +2,8 @@
 
 namespace Kun\Dashboard\Core\Domain\Model;
 
+use DateTime;
+
 class Announcement
 {
 	private AnnouncementId $id;
@@ -38,5 +40,13 @@ class Announcement
 	public function getTimestamp()
 	{
 		return $this->timestamp;
+	}
+
+	public function getDateOnly()
+	{
+		$dt = new DateTime($this->timestamp);
+		$date = $dt->format('d M Y');
+
+		return $date;
 	}
 }
