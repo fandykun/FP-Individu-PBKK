@@ -81,6 +81,8 @@ class AuthController extends BaseController
 
 	public function loginAction()
 	{
+		$this->hasLoggedIn();
+
 		$this->view->pick('auth/login');
 	}
 
@@ -113,11 +115,12 @@ class AuthController extends BaseController
 				'email' => $user->getEmail()
 			));
 
-			$this->dispatcher->forward([
-				'controller' => 'user',
-				'action'     => 'index',
-			]);
-			return;
+			$this->response->redirect('dashboard');
+			// $this->dispatcher->forward([
+			// 	'controller' => 'user',
+			// 	'action'     => 'index',
+			// ]);
+			$this->view->disable();
 		} catch (\Exception $e) {
 			$this->flashSession->error("Invalid Username / Password");
 			return $this->response->redirect('login');

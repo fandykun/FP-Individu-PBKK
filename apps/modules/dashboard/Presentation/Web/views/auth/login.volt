@@ -1,34 +1,48 @@
-{% extends 'layout.volt' %}
+{% extends 'auth/layout.volt' %}
 
-{% block title %}Home{% endblock %}
-
-{% block styles %}
-
-<style>
-
-</style>
-
-{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
-<h1> masuk </h1>
-<p>{{ this.flashSession.output() }}</p>
-<form method="POST" action="{{ url('login/submit') }}">
-    {# CSRF Token #}
-    <input type='hidden' name="{{ this.security.getTokenKey() }}" value="{{ this.security.getToken() }}" />
-    <div class="form-group">
-        <label for="input-key">Username / Email</label>
-        <input type="text" name="keyValue" class="form-control" id="input-key" placeholder="your username / email">
-    </div>
-  <div class="form-group">
-    <label for="input-password">Password</label>
-    <input type="password" name="password" class="form-control" id="input-password" placeholder="your password">
+<form method="POST" action="{{ url('login/submit') }}" class="login100-form validate-form">
+  {# CSRF Token #}
+  <input type='hidden' name="{{ this.security.getTokenKey() }}" value="{{ this.security.getToken() }}" />
+<span class="login100-form-title p-b-26">
+    Selamat Datang
+  </span>
+  <span class="login100-form-title p-b-48">
+    <i class="zmdi zmdi-font"></i>
+  </span>
+  <p>{{ this.flashSession.output() }}</p>
+  <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+    <input class="input100" type="text" name="keyValue">
+    <span class="focus-input100" data-placeholder="Email"></span>
   </div>
-    <button type="submit" class="btn btn-lg btn-success btn-block">Save</button>
-  
+
+  <div class="wrap-input100 validate-input" data-validate="Enter password">
+    <span class="btn-show-pass">
+      <i class="zmdi zmdi-eye"></i>
+    </span>
+    <input class="input100" type="password" name="password">
+    <span class="focus-input100" data-placeholder="Password"></span>
+  </div>
+
+  <div class="container-login100-form-btn">
+    <div class="wrap-login100-form-btn">
+      <div class="login100-form-bgbtn"></div>
+      <button class="login100-form-btn">
+        Login
+      </button>
+    </div>
+  </div>
+
+  <div class="text-center p-t-115">
+    <span class="txt1">
+      Belum mempunyai akun?
+    </span>
+
+    <a class="txt2" href="#">
+      Daftar
+    </a>
+  </div>
 </form>
-{% endblock %}
-
-{% block scripts %}
-
 {% endblock %}

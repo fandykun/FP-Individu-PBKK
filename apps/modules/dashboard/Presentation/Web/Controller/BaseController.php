@@ -13,6 +13,13 @@ class BaseController extends Controller
 		}
 	}
 
+	public function hasLoggedIn()
+	{
+		if($this->isLoggedIn()) {
+			return $this->response->redirect('dashboard');
+		}
+	}
+
 	public function isAdmin()
 	{
 		

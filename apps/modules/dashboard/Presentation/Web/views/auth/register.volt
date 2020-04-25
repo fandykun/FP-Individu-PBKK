@@ -1,37 +1,53 @@
-{% extends 'layout.volt' %}
+{% extends 'auth/layout.volt' %}
 
-{% block title %}Register{% endblock %}
-
-{% block styles %}
-
-<style>
-
-</style>
-
-{% endblock %}
+{% block title %}Daftar{% endblock %}
 
 {% block content %}
-<h1> Daftar </h1>
-<p>{{ this.flashSession.output() }}</p>
-<form method="POST" action="{{ url('register/submit') }}">
-    {# CSRF Token #}
-    <input type='hidden' name="{{ this.security.getTokenKey() }}" value="{{ this.security.getToken() }}" />
-    <div class="form-group">
-        <label for="input-username">Username</label>
-        <input type="text" name="username" class="form-control" id="input-username" placeholder="new username">
-    </div>
-    <div class="form-group">
-        <label for="input-email">Email address</label>
-        <input type="email" name="email" class="form-control" id="input-email" placeholder="name@example.com">
-    </div>
-  <div class="form-group">
-    <label for="input-password">Password</label>
-    <input type="password" name="password" class="form-control" id="input-password" placeholder="your password">
+<form method="POST" action="{{ url('register/submit') }}" class="login100-form validate-form">
+  {# CSRF Token #}
+  <input type='hidden' name="{{ this.security.getTokenKey() }}" value="{{ this.security.getToken() }}" />
+  <span class="login100-form-title p-b-26">
+    Daftar
+  </span>
+  <span class="login100-form-title p-b-48">
+    <i class="zmdi zmdi-font"></i>
+  </span>
+  <p>{{ this.flashSession.output() }}</p>
+  <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+    <input type="text" name="username" class="input100">
+    <span class="focus-input100" data-placeholder="Username"></span>
   </div>
-    <button type="submit" class="btn btn-lg btn-success btn-block">Save</button>
+
+  <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+    <input class="input100" type="text" name="email">
+    <span class="focus-input100" data-placeholder="Email"></span>
+  </div>
+
+  <div class="wrap-input100 validate-input" data-validate="Enter password">
+    <span class="btn-show-pass">
+      <i class="zmdi zmdi-eye"></i>
+    </span>
+    <input class="input100" type="password" name="password">
+    <span class="focus-input100" data-placeholder="Password"></span>
+  </div>
+
+  <div class="container-login100-form-btn">
+    <div class="wrap-login100-form-btn">
+      <div class="login100-form-bgbtn"></div>
+      <button class="login100-form-btn">
+        Kirim
+      </button>
+    </div>
+  </div>
+
+  <div class="text-center p-t-48">
+    <span class="txt1">
+      Sudah mempunyai akun?
+    </span>
+
+    <a class="txt2" href="#">
+      Login
+    </a>
+  </div>
 </form>
-{% endblock %}
-
-{% block scripts %}
-
 {% endblock %}
