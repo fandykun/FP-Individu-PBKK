@@ -112,7 +112,8 @@ class AuthController extends BaseController
 			$this->session->set('auth', array(
 				'id' => $user->getUserId(),
 				'username' => $user->getUsername(),
-				'email' => $user->getEmail()
+				'email' => $user->getEmail(),
+				'role' => $user->getRole()
 			));
 
 			$this->response->redirect('dashboard');

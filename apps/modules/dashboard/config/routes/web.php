@@ -13,13 +13,6 @@ $router->addGet('/dashboard', [
     'action' => 'index'
 ]);
 
-$router->addPost('/dashboard/user/add', [
-    'namespace' => $namespace,
-    'module' => 'dashboard',
-    'controller' => 'user',
-    'action' => 'add'
-]);
-
 //=========
 //-----Auth
 //=========
@@ -58,14 +51,37 @@ $router->addPost('/logout/submit', [
     'action' => 'logout'
 ]);
 
+$router->addGet('/admin', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'admin',
+    'action' => 'index'
+]);
+
 //=================
 //-----Announcement
 //=================
-$router->addPost('/admin/announcement/add', [
+$router->addGet('/admin/pengumuman', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'announcement',
+    'action' => 'index'
+]);
+
+$router->addGet('/admin/pengumuman/add', [
     'namespace' => $namespace,
     'module' => 'dashboard',
     'controller' => 'announcement',
     'action' => 'add'
 ]);
+
+$router->addPost('/admin/pengumuman/add/submit', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'announcement',
+    'action' => 'addSubmit'
+]);
+
+
 
 // return $router;

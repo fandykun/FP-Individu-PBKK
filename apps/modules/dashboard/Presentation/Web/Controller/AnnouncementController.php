@@ -4,7 +4,7 @@ namespace Kun\Dashboard\Presentation\Web\Controller;
 
 use Kun\Dashboard\Core\Application\Service\AddAnnouncement\AddAnnouncementRequest;
 use Kun\Dashboard\Core\Application\Service\AddAnnouncement\AddAnnouncementService;
-use Kun\Dashboard\Core\Application\Service\AddAnnouncement\GetLastAnnouncementService;
+use Kun\Dashboard\Core\Application\Service\GetAllAnnouncement\GetAllAnnouncementService;
 
 /**
  * @property \Phalcon\Mvc\Controller
@@ -17,17 +17,32 @@ class AnnouncementController extends BaseController
 	protected $addAnnouncementService;
 
 	/**
-	 * @var GetLastAnnouncementService
+	 * @var GetAllAnnouncementService
 	 */
-	protected $getLastAnnouncementService;
+	protected $getAllAnnouncementService;
 
 	public function initialize()
 	{
+		$this->authorized();
+		$this->hasAdminPrivilege();
 		$this->addAnnouncementService = $this->getDI()->get('addAnnouncementService');
-		$this->getLastAnnouncementService = $this->getDI()->get('getLastAnnouncementService');
+		$this->getAllAnnouncementService = $this->getDI()->get('getAllAnnouncementService');
+	}
+
+	public function indexAction()
+	{
+		$announcements = $this->getAllAnnouncementService->execute();
+
+		$this->view->setVar('announcements', $announcements);
+		$this->view->pick('admin/announcement/home');
 	}
 
 	public function addAction()
+	{
+		$this->view->pick('admin/announcement/add');
+	}
+
+	public function addSubmitAction()
 	{
 		$title = $this->request->getPost('title');
 		$content = $this->request->getPost('content');
@@ -39,16 +54,11 @@ class AnnouncementController extends BaseController
 		try {
 			$request = new AddAnnouncementRequest($title, $content);
 			$this->addAnnouncementService->execute($request);
-			var_dump('ok');
+			
+			$this->flashSession->success('Pengumuman baru berhasil ditambahkan');
+			$this->response->redirect('admin/pengumuman');
 		} catch(\Exception $e) {
 			var_dump($e->getMessage());
 		}
-	}
-
-	public function getLastAnnouncementAction()
-	{
-		$announcement = $this->getLastAnnouncementService->execute();
-
-		var_dump($announcement); die();
 	}
 }

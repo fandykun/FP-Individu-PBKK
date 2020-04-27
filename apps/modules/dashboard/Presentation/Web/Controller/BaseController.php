@@ -9,7 +9,11 @@ class BaseController extends Controller
 {
 	protected function setAnnouncementView()
 	{
+		/**
+		 * @var GetLastAnnouncementService
+		 */
 		$getLastAnnouncementService = $this->getDI()->get('getLastAnnouncementService');
+
 		$announcement = $getLastAnnouncementService->execute();
 
 		$this->view->setVar('announcement', $announcement);
@@ -20,6 +24,9 @@ class BaseController extends Controller
 		if(!$this->isLoggedIn()) {
 			return $this->response->redirect('login');
 		}
+
+		$auth = $this->session->get('auth');
+		$this->view->setVar('auth', $auth);
 	}
 
 	public function hasLoggedIn()
@@ -29,9 +36,15 @@ class BaseController extends Controller
 		}
 	}
 
-	public function isAdmin()
+	public function hasAdminPrivilege()
 	{
-		
+		if($this->isLoggedIn()) {
+			$auth = $this->session->get('auth');
+
+			if($auth['role'] != 1) {
+				$this->response->redirect('dashboard');
+			}
+		}
 	}
 
 	private function isLoggedIn()

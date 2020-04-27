@@ -17,6 +17,11 @@
 				<a class="nav-link" href="#"><b>PENGUMUMAN</b></a>
 			</li>
 			{% if auth is defined %}
+				{% if auth['role'] == 1 %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url('/admin') }}"><b>ADMIN</b></a>
+				</li>
+				{% endif %}
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i><b> {{ auth['username'] }}</b></a>
 				<div class="dropdown-menu">
