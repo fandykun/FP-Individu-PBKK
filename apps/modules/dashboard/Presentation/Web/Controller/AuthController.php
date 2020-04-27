@@ -116,11 +116,7 @@ class AuthController extends BaseController
 				'role' => $user->getRole()
 			));
 
-			$this->response->redirect('dashboard');
-			// $this->dispatcher->forward([
-			// 	'controller' => 'user',
-			// 	'action'     => 'index',
-			// ]);
+			$this->response->redirect('/');
 			$this->view->disable();
 		} catch (\Exception $e) {
 			$this->flashSession->error("Invalid Username / Password");
@@ -134,6 +130,8 @@ class AuthController extends BaseController
 		// Validate CSRF Token
 		if(true || $this->security->checkToken()) {
 			$this->session->destroy();
+			$this->session->start();
+			$this->flashSession->success("Logout berhasil");
 		} else {
 			$this->flashSession->error("Logout Gagal");
 		}

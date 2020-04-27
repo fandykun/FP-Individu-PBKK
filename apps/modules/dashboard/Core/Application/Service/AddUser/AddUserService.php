@@ -24,7 +24,7 @@ class AddUserService
 				new UserId(),
 				$request->getUsername(),
 				$request->getEmail(),
-				new Password($request->getPassword()),
+				new Password(password_hash($request->getPassword(), PASSWORD_BCRYPT)),
 				$request->getRole()
 			);
 
