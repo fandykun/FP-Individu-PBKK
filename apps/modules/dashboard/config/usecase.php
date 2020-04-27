@@ -4,6 +4,8 @@ use Kun\Dashboard\Core\Application\Service\AddAnnouncement\AddAnnouncementServic
 use Kun\Dashboard\Core\Application\Service\AddPasien\AddPasienService;
 use Kun\Dashboard\Core\Application\Service\AddUser\AddUserService;
 use Kun\Dashboard\Core\Application\Service\DeletePasien\DeletePasienService;
+use Kun\Dashboard\Core\Application\Service\EditPasien\EditPasienService;
+use Kun\Dashboard\Core\Application\Service\FindPasienById\FindPasienByIdService;
 use Kun\Dashboard\Core\Application\Service\FindUserById\FindUserByIdService;
 use Kun\Dashboard\Core\Application\Service\GetAllAnnouncement\GetAllAnnouncementService;
 use Kun\Dashboard\Core\Application\Service\GetAllPasien\GetAllPasienService;
@@ -49,6 +51,14 @@ $di->set('getAllAnnouncementService', function() use ($di) {
 //===================
 $di->set('addPasienService', function() use ($di) {
     return new AddPasienService($di->get('sqlServerPasienRepository'));
+});
+
+$di->set('findPasienByIdService', function() use ($di) {
+    return new FindPasienByIdService($di->get('sqlServerPasienRepository'));
+});
+
+$di->set('editPasienService', function() use ($di) {
+    return new EditPasienService($di->get('sqlServerPasienRepository'));
 });
 
 $di->set('getAllPasienService', function() use ($di) {

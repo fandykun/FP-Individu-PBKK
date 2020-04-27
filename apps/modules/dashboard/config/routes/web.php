@@ -100,6 +100,22 @@ $router->addGet('/admin/pasien/add', [
     'action' => 'add'
 ]);
 
+$router->addGet('/admin/pasien/:params/edit', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'pasien',
+    'action' => 'edit',
+    'params' => 1
+]);
+
+$router->addPost('/admin/pasien/:params/edit/submit', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'pasien',
+    'action' => 'editSubmit',
+    'params' => 1
+]);
+
 $router->addPost('/admin/pasien/add/submit', [
     'namespace' => $namespace,
     'module' => 'dashboard',

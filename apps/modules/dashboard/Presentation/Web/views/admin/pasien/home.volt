@@ -53,12 +53,12 @@
         {% for pasien in pasiens %}
         <tr>
             <td class="align-middle text-center">
-                <button class="btn btn-warning btn-icon-split btn-sm edit" style="margin-bottom: 6px;" data-id="{{ pasien.getId().id() }}">
+                <a href="{{ url('/admin/pasien/' ~ pasien.getId().id() ~ '/edit') }}"><button class="btn btn-warning btn-icon-split btn-sm" style="margin-bottom: 6px;">
                     <span class="icon text-white-50">
                         <i class="fas fa-info-circle"></i>
                     </span>
                     <span class="text">Edit</span>
-                </button> <br>
+                </button> </a><br>
                 <button class="btn btn-danger btn-icon-split btn-sm delete" data-id="{{ pasien.getId().id() }}">
                     <span class="icon text-white-50">
                         <i class="fas fa-trash"></i>

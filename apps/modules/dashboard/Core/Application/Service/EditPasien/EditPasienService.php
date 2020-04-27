@@ -1,12 +1,12 @@
 <?php
 
-namespace Kun\Dashboard\Core\Application\Service\AddPasien;
+namespace Kun\Dashboard\Core\Application\Service\EditPasien;
 
 use Kun\Dashboard\Core\Domain\Model\Pasien;
 use Kun\Dashboard\Core\Domain\Model\PasienId;
 use Kun\Dashboard\Core\Domain\Repository\PasienRepositoryInterface;
 
-class AddPasienService
+class EditPasienService
 {
 	protected PasienRepositoryInterface $repository;
 
@@ -15,11 +15,11 @@ class AddPasienService
 		$this->repository = $repository;
 	}
 
-	public function execute(AddPasienRequest $request)
+	public function execute(EditPasienRequest $request)
 	{
 		try {
 			$pasien = new Pasien(
-				new PasienId(),
+				new PasienId($request->getId()),
 				$request->getNamaLengkap(),
 				$request->getDistrictId(),
 				$request->getAlamat(),
@@ -34,12 +34,8 @@ class AddPasienService
 				$this->generateTimestamp()
 			);
 
-			$result = $this->repository->addPasien($pasien);
-
-			if(!$result) {
-				throw new \Exception('Gagal menambahkan pasien');
-			}
-
+			$this->repository->editPasien($pasien);
+			
 		} catch(\Exception $e) {
 			throw $e;
 		}
