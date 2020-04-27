@@ -3,6 +3,7 @@
 use Kun\Dashboard\Core\Application\Service\AddAnnouncement\AddAnnouncementService;
 use Kun\Dashboard\Core\Application\Service\AddUser\AddUserService;
 use Kun\Dashboard\Core\Application\Service\FindUserById\FindUserByIdService;
+use Kun\Dashboard\Core\Application\Service\GetAllAnnouncement\GetAllAnnouncementService;
 use Kun\Dashboard\Core\Application\Service\GetAllProvince\GetAllProvinceService;
 use Kun\Dashboard\Core\Application\Service\GetLastAnnouncement\GetLastAnnouncementService;
 use Kun\Dashboard\Core\Application\Service\GetRegencies\GetRegenciesService;
@@ -32,6 +33,10 @@ $di->set('addAnnouncementService', function() use ($di) {
 
 $di->set('getLastAnnouncementService', function() use ($di) {
     return new GetLastAnnouncementService($di->get('sqlServerAnnouncementRepository'));
+});
+
+$di->set('getAllAnnouncementService', function() use ($di) {
+    return new GetAllAnnouncementService($di->get('sqlServerAnnouncementRepository'));
 });
 
 //===================

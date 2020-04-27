@@ -55,7 +55,25 @@ class SqlServerAnnouncementRepository implements AnnouncementRepositoryInterface
 
 	public function getAllAnnouncement() : array
 	{
+		$sql = "SELECT * FROM announcements ORDER BY timestamp DESC";
 
+		$results = $this->db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
+
+		$announcements = [];
+		if($results) {
+			foreach($results as $result) {
+				$announcement = new Announcement(
+					new AnnouncementId($result['id']),
+					$result['title'],
+					$result['content'],
+					$result['timestamp']
+				);
+
+				array_push($announcements, $announcement);
+			}
+		}
+
+		return $announcements;
 	}
 
 	public function deleteAnnouncement(AnnouncementId $id)
