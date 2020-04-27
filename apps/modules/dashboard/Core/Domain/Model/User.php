@@ -4,6 +4,9 @@ namespace Kun\Dashboard\Core\Domain\Model;
 
 class User
 {
+	protected const ROLE_USER = 0;
+	protected const ROLE_ADMIN = 1;
+
 	private UserId $userId;
 
 	private string $username;

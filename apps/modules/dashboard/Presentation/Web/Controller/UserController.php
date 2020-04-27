@@ -6,6 +6,7 @@ use Kun\Dashboard\Core\Application\Service\AddUser\AddUserRequest;
 use Kun\Dashboard\Core\Application\Service\AddUser\AddUserService;
 use Kun\Dashboard\Core\Application\Service\FindUserById\FindUserByIdRequest;
 use Kun\Dashboard\Core\Application\Service\FindUserById\FindUserByIdService;
+use Kun\Dashboard\Core\Application\Service\GetAllProvince\GetAllProvinceService;
 
 class UserController extends BaseController
 {
@@ -13,11 +14,16 @@ class UserController extends BaseController
 
 	protected AddUserService $addUserService;
 
+	protected GetAllProvinceService $getAllProvinceService;
+
 	public function initialize() 
 	{
 		$this->setAnnouncementView();
+		$this->setAuthView();
+
 		$this->findUserByIdService = $this->getDI()->get('findUserByIdService');
 		$this->addUserService = $this->getDI()->get('addUserService');
+		$this->getAllProvinceService = $this->getDI()->get('getAllProvinceService');
 	}
 
 	public function indexAction()
@@ -41,16 +47,26 @@ class UserController extends BaseController
 		} catch (\Exception $e) {
 			var_dump($e->getMessage());
 		}
-
 	}
 
 	public function editAction($userId)
 	{
 		$this->authorized();
 
-		$auth = $this->session->get('auth');
+		$request = new FindUserByIdRequest($userId);
+		$response = $this->findUserByIdService->execute($request);
 
+		$user = $response->getData();
 
+		$provinces = $this->getAllProvinceService->execute();
+
+		$this->view->setVar('provinces', $provinces);
+		$this->view->setVar('user', $user);
+		$this->view->pick('user/view');
+	}
+
+	public function editSubmitAction()
+	{
 
 	}
 

@@ -2,6 +2,8 @@
 
 namespace Kun\Dashboard\Presentation\Web\Controller;
 
+use Kun\Dashboard\Core\Application\Service\GetAllProvince\GetAllProvinceService;
+use Kun\Dashboard\Core\Application\Service\GetAllStatusCovid19\GetAllStatusCovid19Service;
 use Kun\Dashboard\Core\Application\Service\GetLastAnnouncement\GetLastAnnouncementService;
 use Phalcon\Mvc\Controller;
 
@@ -19,7 +21,31 @@ class BaseController extends Controller
 		$this->view->setVar('announcement', $announcement);
 	}
 
-	public function setAuthView()
+	protected function setProvinceView()
+	{
+		/**
+		 * @var GetAllProvinceService
+		 */
+		$getAllProvinceService = $this->getDI()->get('getAllProvinceService');
+
+		$provinces = $getAllProvinceService->execute();
+
+		$this->view->setVar('provinces', $provinces);
+	}
+
+	protected function setStatusCovid19View()
+	{
+		/**
+		 * @var GetAllStatusCovid19Service
+		 */
+		$getAllStatusCovid19 = $this->getDI()->get('getAllStatusCovid19Service');
+
+		$status = $getAllStatusCovid19->execute();
+
+		$this->view->setVar('statusCovids', $status);
+	}
+
+	protected function setAuthView()
 	{
 		if($this->isLoggedIn()) {
 			$auth = $this->session->get('auth');

@@ -88,10 +88,19 @@ class SqlServerUserRepository implements UserRepositoryInterface
 		return null;
 	}
 
-	public function updateUser(User $user) : User {
-		// $user = new User();
+	public function editUser(User $user)
+	{
+		$sql = "UPDATE users SET username=:username, email=:email, password=:password WHERE user_id=:user_id";
+		$params = [
+			'username' => $user->getUsername(),
+			'email' => $user->getEmail(),
+			'password' => $user->getPassword()->toString(),
+			'user_id' => $user->getUserId()->id()
+		];
 
-		return $user;
+		$result = $this->db->execute($sql, \Phalcon\Db\Enum::FETCH_ASSOC, $params);
+
+		return $result;
 	}
 
 	public function deleteUser(UserId $id) {

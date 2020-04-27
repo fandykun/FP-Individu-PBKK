@@ -13,7 +13,7 @@ interface UserRepositoryInterface
 
 	public function LoginUser(string $key, string $password) : ?User;
 
-	public function updateUser(User $user) : User;
+	public function editUser(User $user);
 
 	public function deleteUser(UserId $id);
 }

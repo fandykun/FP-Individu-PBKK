@@ -2,7 +2,6 @@
 
 namespace Kun\Dashboard\Core\Application\Service\AddUser;
 
-use Exception;
 use Kun\Dashboard\Core\Domain\Model\Password;
 use Kun\Dashboard\Core\Domain\Model\User;
 use Kun\Dashboard\Core\Domain\Model\UserId;
@@ -31,7 +30,7 @@ class AddUserService
 			$result = $this->userRepository->addUser($user);
 
 			if(!$result) {
-				throw new Exception('unable to add user');
+				throw new \Exception('unable to add user');
 			}
 
 		} catch (\Exception $e) {
