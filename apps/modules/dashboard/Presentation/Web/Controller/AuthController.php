@@ -110,7 +110,7 @@ class AuthController extends BaseController
 			$user = $response->getData();
 
 			$this->session->set('auth', array(
-				'id' => $user->getUserId(),
+				'id' => $user->getUserId()->id(),
 				'username' => $user->getUsername(),
 				'email' => $user->getEmail(),
 				'role' => $user->getRole()
