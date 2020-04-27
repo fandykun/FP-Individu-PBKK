@@ -19,7 +19,7 @@ class SqlServerRegencyRepository implements RegencyRepositoryInterface
 
 	public function getRegencies($provinceId) : array
 	{
-		$sql = "SELECT * FROM regencies WHERE province_id=:province_id";
+		$sql = "SELECT * FROM regencies WHERE province_id=:province_id ORDER BY name";
 		
 		$param = ['province_id' => $provinceId];
 

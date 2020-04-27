@@ -2,6 +2,7 @@
 
 namespace Kun\Dashboard\Core\Application\Service\GetRegencies;
 
+use Kun\Dashboard\Core\Domain\Model\Regency;
 use Kun\Dashboard\Core\Domain\Repository\RegencyRepositoryInterface;
 
 class GetRegenciesService
@@ -24,6 +25,11 @@ class GetRegenciesService
 			throw $e;
 		}
 
-		return $regencies;
+		$output = [];
+		foreach($regencies as $regency) {
+			$output[$regency->getId()] = $regency->getName();
+		}
+
+		return $output;
 	}
 }
