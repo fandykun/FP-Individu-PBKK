@@ -7,6 +7,7 @@ class IndexController extends BaseController
 	public function initialize()
 	{
 		$this->setAnnouncementView();
+		$this->setAuthView();
 	}
 
 	public function indexAction()

@@ -22,11 +22,8 @@ class UserController extends BaseController
 
 	public function indexAction()
 	{
-		// $response = $this->findUserByIdService->execute(new FindUserByIdRequest('1dd5c72b-ddf5-495c-9fc8-6bc5bda368c2'));
 		$this->authorized();
 
-		$auth = $this->session->get('auth');
-		$this->view->setVar('auth', $auth);
 		return $this->view->pick('dashboard');
 	}
 
@@ -44,6 +41,16 @@ class UserController extends BaseController
 		} catch (\Exception $e) {
 			var_dump($e->getMessage());
 		}
+
+	}
+
+	public function editAction($userId)
+	{
+		$this->authorized();
+
+		$auth = $this->session->get('auth');
+
+
 
 	}
 

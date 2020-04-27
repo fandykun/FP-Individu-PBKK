@@ -19,14 +19,21 @@ class BaseController extends Controller
 		$this->view->setVar('announcement', $announcement);
 	}
 
+	public function setAuthView()
+	{
+		if($this->isLoggedIn()) {
+			$auth = $this->session->get('auth');
+			$this->view->setVar('auth', $auth);
+		}
+	}
+
 	public function authorized()
 	{
 		if(!$this->isLoggedIn()) {
 			return $this->response->redirect('login');
 		}
 
-		$auth = $this->session->get('auth');
-		$this->view->setVar('auth', $auth);
+		$this->setAuthView();
 	}
 
 	public function hasLoggedIn()
