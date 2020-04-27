@@ -45,30 +45,31 @@
 {% endblock %}
 
 {% block content %}
+<p>{{ this.flashSession.output() }}</p>
 <div class="text-center mb-5 font-weight-bold">
     <h3> SISTEM INFORMASI COVID-19 (Beta version) </h3>
 </div>
 <div class="row justify-content-center mb-3">
     <div class="col-3 col-sm-3 kartu kartu-ungu text-center">
-        <h5>Judul</h5>
+        <h5>ODP</h5>
         <h2>1000000</h2>
     </div>
     <div class="col-3 col-sm-3 kartu kartu-hijau text-center">
-        <h5>Judul</h5>
+        <h5>PDP</h5>
         <h2>1000000</h2>
     </div>
     <div class="col-3 col-sm-3 kartu kartu-merah text-center">
-        <h5>Judul</h5>
+        <h5>Positif</h5>
         <h2>1000000</h2>
     </div>
 </div>
 <div class="row justify-content-center mb-5">
     <div class="col-3 col-sm-3 kartu kartu-kuning text-center">
-        <h5>Judul</h5>
+        <h5>Negatif</h5>
         <h2>1000000</h2>
     </div>
     <div class="col-3 col-sm-3 kartu kartu-biru text-center">
-        <h5>Judul</h5>
+        <h5>Sembuh</h5>
         <h2>1000000</h2>
     </div>
 </div>

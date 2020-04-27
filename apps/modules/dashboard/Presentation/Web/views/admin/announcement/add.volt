@@ -46,5 +46,7 @@
 {% endblock %}
 
 {% block scripts %}
-
+<script>
+    $("#nav-pengumuman").addClass("active");
+</script>
 {% endblock %}

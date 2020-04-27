@@ -45,7 +45,7 @@
       Sudah mempunyai akun?
     </span>
 
-    <a class="txt2" href="#">
+    <a class="txt2" href="{{ url('login') }}">
       Login disini
     </a>
   </div>

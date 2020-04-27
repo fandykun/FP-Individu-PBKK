@@ -40,7 +40,7 @@
       Belum mempunyai akun?
     </span>
 
-    <a class="txt2" href="#">
+    <a class="txt2" href="{{ url('register') }}">
       Daftar disini
     </a>
   </div>

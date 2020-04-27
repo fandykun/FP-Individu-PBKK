@@ -36,7 +36,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item" id="nav-pasien">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link" href="{{ url('admin/pasien') }}">
         <i class="fas fa-fw fa-table"></i>
         <span>Pasien</span></a>
     </li>
