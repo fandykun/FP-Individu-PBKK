@@ -28,6 +28,14 @@ class Pasien
 
 	private string $statusId;
 
+	private string $namaStatus;
+
+	private string $namaKecamatan;
+
+	private string $namaKabupaten;
+
+	private string $namaProvinsi;
+
 	public function __construct(
 		PasienId $id,
 		string $namaLengkap,
@@ -106,7 +114,8 @@ class Pasien
 		$this->jenisKelamin = $jenisKelamin;
 	}
 
-	public function getTinggiBadan(){
+	public function getTinggiBadan()
+	{
 		return $this->tinggiBadan;
 	}
 
@@ -165,11 +174,53 @@ class Pasien
 		$this->alergi = $alergi;
 	}
 
-	public function getStatusId(){
+	public function getStatusId()
+	{
 		return $this->statusId;
 	}
 
-	public function setStatusId($statusId){
+	public function setStatusId($statusId)
+	{
 		$this->statusId = $statusId;
+	}
+
+	public function getNamaStatus()
+	{
+		return $this->namaStatus;
+	}
+
+	public function setNamaStatus($namaStatus)
+	{
+		$this->namaStatus = $namaStatus;
+	}
+
+	public function getNamaKecamatan()
+	{
+		return $this->namaKecamatan;
+	}
+
+	public function setNamaKecamatan($namaKecamatan)
+	{
+		$this->namaKecamatan = $namaKecamatan;
+	}
+
+	public function getNamaKabupaten()
+	{
+		return $this->namaKabupaten;
+	}
+
+	public function setNamaKabupaten($namaKabupaten)
+	{
+		$this->namaKabupaten = $namaKabupaten;
+	}
+
+	public function getNamaProvinsi()
+	{
+		return $this->namaProvinsi;
+	}
+
+	public function setNamaProvinsi($namaProvinsi)
+	{
+		$this->namaProvinsi = $namaProvinsi;
 	}
 }

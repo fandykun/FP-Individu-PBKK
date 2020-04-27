@@ -4,6 +4,9 @@ namespace Kun\Dashboard\Presentation\Web\Controller;
 
 use Kun\Dashboard\Core\Application\Service\AddPasien\AddPasienRequest;
 use Kun\Dashboard\Core\Application\Service\AddPasien\AddPasienService;
+use Kun\Dashboard\Core\Application\Service\DeletePasien\DeletePasienRequest;
+use Kun\Dashboard\Core\Application\Service\DeletePasien\DeletePasienService;
+use Kun\Dashboard\Core\Application\Service\GetAllPasien\GetAllPasienService;
 
 class PasienController extends BaseController
 {
@@ -12,16 +15,31 @@ class PasienController extends BaseController
 	 */
 	protected $addPasienService;
 
+	/**
+	 * @var GetAllPasienService
+	 */
+	protected $getAllPasienService;
+
+	/**
+	 * @var DeletePasienService
+	 */
+	protected $deletePasienService;
+
 	public function initialize()
 	{
 		$this->authorized();
 		$this->hasAdminPrivilege();
 
 		$this->addPasienService = $this->getDI()->get('addPasienService');
+		$this->getAllPasienService = $this->getDI()->get('getAllPasienService');
+		$this->deletePasienService = $this->getDI()->get('deletePasienService');
 	}
 
 	public function indexAction()
 	{
+		$pasiens = $this->getAllPasienService->execute();
+
+		$this->view->setVar('pasiens', $pasiens);
 		$this->view->pick('admin/pasien/home');
 	}
 
@@ -68,6 +86,24 @@ class PasienController extends BaseController
 			$this->response->redirect('admin/pasien');
 		} catch(\Phalcon\Exception $e) {
 			throw $e;
+		}
+	}
+
+	public function deleteAction()
+	{
+		if($this->request->isPost()) {
+			try {
+				$id = $this->request->getPost('id');
+
+				$request = new DeletePasienRequest($id);
+				$this->deletePasienService->execute($request);
+	
+				$this->flashSession->success('Hapus data pasien berhasil');
+			} catch(\Exception $e) {
+				$this->flashSession->error('Gagal menghapus data pasien');
+			}
+
+			$this->response->redirect('admin/pasien');
 		}
 	}
 }

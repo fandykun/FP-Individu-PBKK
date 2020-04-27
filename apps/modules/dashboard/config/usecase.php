@@ -1,10 +1,15 @@
 <?php
 
 use Kun\Dashboard\Core\Application\Service\AddAnnouncement\AddAnnouncementService;
+use Kun\Dashboard\Core\Application\Service\AddPasien\AddPasienService;
 use Kun\Dashboard\Core\Application\Service\AddUser\AddUserService;
+use Kun\Dashboard\Core\Application\Service\DeletePasien\DeletePasienService;
 use Kun\Dashboard\Core\Application\Service\FindUserById\FindUserByIdService;
 use Kun\Dashboard\Core\Application\Service\GetAllAnnouncement\GetAllAnnouncementService;
+use Kun\Dashboard\Core\Application\Service\GetAllPasien\GetAllPasienService;
 use Kun\Dashboard\Core\Application\Service\GetAllProvince\GetAllProvinceService;
+use Kun\Dashboard\Core\Application\Service\GetAllStatusCovid19\GetAllStatusCovid19Service;
+use Kun\Dashboard\Core\Application\Service\GetDistricts\GetDistrictsService;
 use Kun\Dashboard\Core\Application\Service\GetLastAnnouncement\GetLastAnnouncementService;
 use Kun\Dashboard\Core\Application\Service\GetRegencies\GetRegenciesService;
 use Kun\Dashboard\Core\Application\Service\LoginUser\LoginUserService;
@@ -40,12 +45,38 @@ $di->set('getAllAnnouncementService', function() use ($di) {
 });
 
 //===================
-//-----Region Usecase
+//-----Pasien Usecase
 //===================
+$di->set('addPasienService', function() use ($di) {
+    return new AddPasienService($di->get('sqlServerPasienRepository'));
+});
+
+$di->set('getAllPasienService', function() use ($di) {
+    return new GetAllPasienService($di->get('sqlServerPasienRepository'));
+});
+
+$di->set('deletePasienService', function() use ($di) {
+    return new DeletePasienService($di->get('sqlServerPasienRepository'));
+});
+
+//==========================
+//-----StatusCovid19 Usecase
+//==========================
+$di->set('getAllStatusCovid19Service', function() use ($di) {
+    return new GetAllStatusCovid19Service($di->get('sqlServerStatusCovid19Repository'));
+});
+
+//====================
+//-----Address Usecase
+//====================
 $di->set('getAllProvinceService', function() use ($di) {
     return new GetAllProvinceService($di->get('sqlServerProvinceRepository'));
 });
 
 $di->set('getRegenciesService', function() use ($di) {
     return new GetRegenciesService($di->get('sqlServerRegencyRepository'));
+});
+
+$di->set('getDistrictsService', function() use ($di) {
+    return new GetDistrictsService($di->get('sqlServerDistrictRepository'));
 });

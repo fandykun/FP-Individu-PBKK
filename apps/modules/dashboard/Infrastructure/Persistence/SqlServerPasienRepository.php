@@ -43,7 +43,16 @@ class SqlServerPasienRepository implements PasienRepositoryInterface
 
 	public function getAllPasien() : array
 	{
-		$sql = "SELECT * FROM pasiens";
+		$sql = "SELECT pasiens.*, 
+		status_covid19.nama as nama_status, 
+		districts.name as nama_kecamatan,
+		regencies.name as nama_kabupaten,
+		provinces.name as nama_provinsi
+	FROM pasiens 
+	LEFT JOIN status_covid19 ON pasiens.status_id = status_covid19.id
+	LEFT JOIN districts ON pasiens.district_id = districts.id 
+	LEFT JOIN regencies ON districts.regency_id = regencies.id
+	LEFT JOIN provinces ON provinces.id = regencies.province_id ;";
 
 		$results = $this->db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
 
@@ -64,6 +73,11 @@ class SqlServerPasienRepository implements PasienRepositoryInterface
 					$result['alergi'],
 					$result['status_id']
 				);
+
+				$pasien->setNamaStatus($result['nama_status']);
+				$pasien->setNamaKecamatan($result['nama_kecamatan']);
+				$pasien->setNamaKabupaten($result['nama_kabupaten']);
+				$pasien->setNamaProvinsi($result['nama_provinsi']);
 
 				array_push($pasiens, $pasien);
 			}
@@ -110,6 +124,13 @@ class SqlServerPasienRepository implements PasienRepositoryInterface
 
 	public function deletePasien(PasienId $id)
 	{
-		
+		$sql = "DELETE FROM pasiens WHERE id=:id";
+		$param = [
+			'id' => $id->id()
+		];
+
+		$result = $this->db->execute($sql, $param);
+
+		return $result;
 	}
 }

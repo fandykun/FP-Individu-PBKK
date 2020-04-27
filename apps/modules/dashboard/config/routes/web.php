@@ -6,14 +6,7 @@ $namespace = 'Kun\Dashboard\Presentation\Web\Controller';
  * @var \Phalcon\Mvc\Router $router
  */
 
-$router->addGet('/dashboard', [
-    'namespace' => $namespace,
-    'module' => 'dashboard',
-    'controller' => 'user',
-    'action' => 'index'
-]);
-
-//=========
+ //=========
 //-----Auth
 //=========
 $router->addGet('/register', [
@@ -51,6 +44,14 @@ $router->addPost('/logout/submit', [
     'action' => 'logout'
 ]);
 
+$router->addGet('/user/:params', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'user',
+    'action' => 'edit',
+    'params'=> 1
+]);
+
 $router->addGet('/admin', [
     'namespace' => $namespace,
     'module' => 'dashboard',
@@ -82,6 +83,52 @@ $router->addPost('/admin/pengumuman/add/submit', [
     'action' => 'addSubmit'
 ]);
 
+//===========
+//-----Pasien
+//===========
+$router->addGet('/admin/pasien', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'pasien',
+    'action' => 'index'
+]);
 
+$router->addGet('/admin/pasien/add', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'pasien',
+    'action' => 'add'
+]);
+
+$router->addPost('/admin/pasien/add/submit', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'pasien',
+    'action' => 'addSubmit'
+]);
+
+$router->addPost('/admin/pasien/delete', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'pasien',
+    'action' => 'delete',
+]);
+
+//============
+//-----Address
+//============
+$router->addPost('/get/regency', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'address',
+    'action' => 'getRegencies'
+]);
+
+$router->addPost('/get/district', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'address',
+    'action' => 'getDistricts'
+]);
 
 // return $router;
