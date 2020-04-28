@@ -27,6 +27,7 @@ class IndexController extends BaseController
 
 		$hasil = Kasus::getAllJumlahByNama($jumlahs);
 
+		$this->view->setVar('kasus', $jumlahs);
 		$this->view->setVar('jumlah', $hasil);
 		$this->view->pick('home');
 	}
