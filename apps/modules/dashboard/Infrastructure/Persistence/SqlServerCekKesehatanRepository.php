@@ -3,6 +3,7 @@
 namespace Kun\Dashboard\Infrastructure\Persistence;
 
 use Kun\Dashboard\Core\Domain\Model\CekKesehatan;
+use Kun\Dashboard\Core\Domain\Model\CekKesehatanId;
 use Kun\Dashboard\Core\Domain\Repository\CekKesehatanRepositoryInterface;
 
 class SqlServerCekKesehatanRepository implements CekKesehatanRepositoryInterface
@@ -51,15 +52,15 @@ class SqlServerCekKesehatanRepository implements CekKesehatanRepositoryInterface
 		if($results) {
 			foreach($results as $result) {
 				$cekKesehatan = new CekKesehatan(
-					$result['id'],
+					new CekKesehatanId($result['id']),
 					$result['user_id'],
 					$result['suhu_tubuh'],
 					$result['frekuensi_napas'],
 					$result['gejala_lain'],
 					$result['timestamp'],
+					$result['riwayat_perjalanan'],
 					$result['is_checked'],
 					$result['hasil'],
-					$result['riwayat_perjalanan']
 				);
 
 				array_push($cekKesehatans, $cekKesehatan);

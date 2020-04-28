@@ -147,6 +147,13 @@ $router->addPost('/cek-kesehatan/submit', [
     'action' => 'addSubmit'
 ]);
 
+$router->addGet('/admin/cek-kesehatan', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'cekKesehatan',
+    'action' => 'adminIndex'
+]);
+
 //============
 //-----Address
 //============

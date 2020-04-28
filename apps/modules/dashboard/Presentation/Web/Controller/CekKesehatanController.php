@@ -38,6 +38,17 @@ class CekKesehatanController extends BaseController
 		return;
 	}
 
+	public function adminIndexAction()
+	{
+		$this->authorized();
+		$this->hasAdminPrivilege();
+
+		$ceks = $this->getAllCekKesehatanService->execute();
+
+		$this->view->setVar('ceks', $ceks);
+		$this->view->pick('admin/cek/home');
+	}
+
 	public function addAction()
 	{
 		$this->view->pick('cek/add');
