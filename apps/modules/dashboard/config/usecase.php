@@ -1,6 +1,7 @@
 <?php
 
 use Kun\Dashboard\Core\Application\Service\AddAnnouncement\AddAnnouncementService;
+use Kun\Dashboard\Core\Application\Service\AddCekKesehatan\AddCekKesehatanService;
 use Kun\Dashboard\Core\Application\Service\AddPasien\AddPasienService;
 use Kun\Dashboard\Core\Application\Service\AddUser\AddUserService;
 use Kun\Dashboard\Core\Application\Service\DeletePasien\DeletePasienService;
@@ -8,6 +9,7 @@ use Kun\Dashboard\Core\Application\Service\EditPasien\EditPasienService;
 use Kun\Dashboard\Core\Application\Service\FindPasienById\FindPasienByIdService;
 use Kun\Dashboard\Core\Application\Service\FindUserById\FindUserByIdService;
 use Kun\Dashboard\Core\Application\Service\GetAllAnnouncement\GetAllAnnouncementService;
+use Kun\Dashboard\Core\Application\Service\GetAllCekKesehatan\GetAllCekKesehatanService;
 use Kun\Dashboard\Core\Application\Service\GetAllPasien\GetAllPasienService;
 use Kun\Dashboard\Core\Application\Service\GetAllProvince\GetAllProvinceService;
 use Kun\Dashboard\Core\Application\Service\GetAllStatusCovid19\GetAllStatusCovid19Service;
@@ -67,6 +69,17 @@ $di->set('getAllPasienService', function() use ($di) {
 
 $di->set('deletePasienService', function() use ($di) {
     return new DeletePasienService($di->get('sqlServerPasienRepository'));
+});
+
+//==========================
+//-----Cek Kesehatan Usecase
+//==========================
+$di->set('addCekKesehatanService', function() use ($di) {
+    return new AddCekKesehatanService($di->get('sqlServerCekKesehatanRepository'));
+});
+
+$di->set('getAllCekKesehatanService', function() use ($di) {
+    return new GetAllCekKesehatanService($di->get('sqlServerCekKesehatanRepository'));
 });
 
 //==========================

@@ -1,6 +1,7 @@
 <?php
 
 use Kun\Dashboard\Infrastructure\Persistence\SqlServerAnnouncementRepository;
+use Kun\Dashboard\Infrastructure\Persistence\SqlServerCekKesehatanRepository;
 use Kun\Dashboard\Infrastructure\Persistence\SqlServerDistrictRepository;
 use Kun\Dashboard\Infrastructure\Persistence\SqlServerPasienRepository;
 use Kun\Dashboard\Infrastructure\Persistence\SqlServerProvinceRepository;
@@ -39,4 +40,8 @@ $di->set('sqlServerDistrictRepository', function() use ($di) {
 
 $di->set('sqlServerStatusCovid19Repository', function() use ($di) {
     return new SqlServerStatusCovid19Repository($di->get('db'));
+});
+
+$di->set('sqlServerCekKesehatanRepository', function() use ($di) {
+    return new SqlServerCekKesehatanRepository($di->get('db'));
 });

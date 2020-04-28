@@ -130,6 +130,23 @@ $router->addPost('/admin/pasien/delete', [
     'action' => 'delete',
 ]);
 
+//==================
+//-----Cek Kesehatan
+//==================
+$router->addGet('/cek-kesehatan', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'cekKesehatan',
+    'action' => 'index'
+]);
+
+$router->addPost('/cek-kesehatan/submit', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'cekKesehatan',
+    'action' => 'addSubmit'
+]);
+
 //============
 //-----Address
 //============
