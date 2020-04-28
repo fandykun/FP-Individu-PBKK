@@ -52,25 +52,25 @@
 <div class="row justify-content-center mb-3">
     <div class="col-3 col-sm-3 kartu kartu-ungu text-center">
         <h5>ODP</h5>
-        <h2>1000000</h2>
+        <h2>{{ jumlah['ODP'] }}</h2>
     </div>
     <div class="col-3 col-sm-3 kartu kartu-hijau text-center">
         <h5>PDP</h5>
-        <h2>1000000</h2>
+        <h2>{{ jumlah['PDP'] }}</h2>
     </div>
     <div class="col-3 col-sm-3 kartu kartu-merah text-center">
         <h5>Positif</h5>
-        <h2>1000000</h2>
+        <h2>{{ jumlah['Positif'] }}</h2>
     </div>
 </div>
 <div class="row justify-content-center mb-5">
     <div class="col-3 col-sm-3 kartu kartu-kuning text-center">
         <h5>Negatif</h5>
-        <h2>1000000</h2>
+        <h2>{{ jumlah['Negatif'] }}</h2>
     </div>
     <div class="col-3 col-sm-3 kartu kartu-biru text-center">
         <h5>Sembuh</h5>
-        <h2>1000000</h2>
+        <h2>{{ jumlah['Sembuh'] }}</h2>
     </div>
 </div>
 <div class="text-center">

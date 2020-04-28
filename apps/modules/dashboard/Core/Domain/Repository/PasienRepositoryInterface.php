@@ -4,6 +4,7 @@ namespace Kun\Dashboard\Core\Domain\Repository;
 
 use Kun\Dashboard\Core\Domain\Model\Pasien;
 use Kun\Dashboard\Core\Domain\Model\PasienId;
+use Kun\Dashboard\Core\Domain\Model\StatusCovid19;
 
 interface PasienRepositoryInterface
 {
@@ -16,4 +17,6 @@ interface PasienRepositoryInterface
 	public function editPasien(Pasien $pasien);
 
 	public function deletePasien(PasienId $id);
+
+	public function getCountKasus() : array;
 }

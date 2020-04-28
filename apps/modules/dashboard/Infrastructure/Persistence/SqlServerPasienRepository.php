@@ -4,6 +4,7 @@ namespace Kun\Dashboard\Infrastructure\Persistence;
 
 use Kun\Dashboard\Core\Domain\Model\Pasien;
 use Kun\Dashboard\Core\Domain\Model\PasienId;
+use Kun\Dashboard\Core\Domain\Model\StatusCovid19;
 use Kun\Dashboard\Core\Domain\Repository\PasienRepositoryInterface;
 
 class SqlServerPasienRepository implements PasienRepositoryInterface
@@ -183,5 +184,24 @@ class SqlServerPasienRepository implements PasienRepositoryInterface
 		$result = $this->db->execute($sql, $param);
 
 		return $result;
+	}
+
+	public function getCountKasus() : array
+	{
+		$sql = "SELECT COUNT(p.status_id) as total, sc.nama FROM status_covid19 sc
+			LEFT JOIN pasiens p
+			ON p.status_id = sc.id
+			GROUP BY sc.nama;";
+
+		$results = $this->db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
+
+		$jumlahs = [];
+		if($results) {
+			foreach($results as $result) {
+				$jumlahs[$result['nama']] = $result['total'];
+			}
+		}
+
+		return $jumlahs;
 	}
 }

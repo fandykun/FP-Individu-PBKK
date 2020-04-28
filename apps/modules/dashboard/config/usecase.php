@@ -15,6 +15,7 @@ use Kun\Dashboard\Core\Application\Service\GetAllCekKesehatan\GetAllCekKesehatan
 use Kun\Dashboard\Core\Application\Service\GetAllPasien\GetAllPasienService;
 use Kun\Dashboard\Core\Application\Service\GetAllProvince\GetAllProvinceService;
 use Kun\Dashboard\Core\Application\Service\GetAllStatusCovid19\GetAllStatusCovid19Service;
+use Kun\Dashboard\Core\Application\Service\GetCountKasus\GetCountKasusService;
 use Kun\Dashboard\Core\Application\Service\GetDistricts\GetDistrictsService;
 use Kun\Dashboard\Core\Application\Service\GetLastAnnouncement\GetLastAnnouncementService;
 use Kun\Dashboard\Core\Application\Service\GetRegencies\GetRegenciesService;
@@ -71,6 +72,10 @@ $di->set('getAllPasienService', function() use ($di) {
 
 $di->set('deletePasienService', function() use ($di) {
     return new DeletePasienService($di->get('sqlServerPasienRepository'));
+});
+
+$di->set('getCountKasusService', function() use ($di) {
+    return new GetCountKasusService($di->get('sqlServerPasienRepository'));
 });
 
 //==========================
