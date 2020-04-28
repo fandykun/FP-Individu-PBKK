@@ -3,6 +3,7 @@
 namespace Kun\Dashboard\Core\Domain\Repository;
 
 use Kun\Dashboard\Core\Domain\Model\CekKesehatan;
+use Kun\Dashboard\Core\Domain\Model\CekKesehatanId;
 
 interface CekKesehatanRepositoryInterface
 {
@@ -10,7 +11,7 @@ interface CekKesehatanRepositoryInterface
 
 	public function getAllCekKesehatan() : array;
 
-	public function findCekKesehatanByUserId($userId) : ?CekKesehatan;
+	public function findCekKesehatanByUserId(CekKesehatanId $id) : ?CekKesehatan;
 
-	public function editCekKesehatan(CekKesehatan $cekKesehatan);
+	public function editCekKesehatan(CekKesehatanId $id,$is_checked, $hasil);
 }

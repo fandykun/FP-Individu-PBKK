@@ -11,7 +11,7 @@
 				<a class="nav-link" href="{{ url('/') }}"><b>BERANDA</b></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{{ url('/about') }}"><b>CEK KESEHATAN</b></a>
+				<a class="nav-link" href="{{ url('/cek-kesehatan') }}"><b>CEK KESEHATAN</b></a>
 			</li>
 			<li class="nav-item" data-toggle="modal" data-target="#modal-pengumuman">
 				<a class="nav-link" href="#"><b>PENGUMUMAN</b></a>
@@ -25,7 +25,7 @@
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i><b> {{ auth['username'] }}</b></a>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="{{ url("user/" ~ auth['id']) }}">Data Profil</a>
+					{# <a class="dropdown-item" href="{{ url("user/" ~ auth['id']) }}">Data Profil</a> #}
 					<div class="dropdown-divider"></div>
 					<form method="POST" action="{{ url('logout/submit') }}">
 						{# CSRF Token #}

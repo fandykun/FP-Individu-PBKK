@@ -41,6 +41,13 @@
         <span>Pasien</span></a>
     </li>
 
+    <!-- Nav Item - Tables -->
+    <li class="nav-item" id="nav-cek">
+    <a class="nav-link" href="{{ url('admin/cek-kesehatan') }}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Cek Kesehatan</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

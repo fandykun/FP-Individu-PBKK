@@ -154,6 +154,22 @@ $router->addGet('/admin/cek-kesehatan', [
     'action' => 'adminIndex'
 ]);
 
+$router->addGet('/admin/cek-kesehatan/:params/edit', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'cekKesehatan',
+    'action' => 'edit',
+    'params' => 1
+]);
+
+$router->addPost('/admin/cek-kesehatan/:params/edit/submit', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'cekKesehatan',
+    'action' => 'editSubmit',
+    'params' => 1
+]);
+
 //============
 //-----Address
 //============

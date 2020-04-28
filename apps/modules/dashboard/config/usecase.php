@@ -5,7 +5,9 @@ use Kun\Dashboard\Core\Application\Service\AddCekKesehatan\AddCekKesehatanServic
 use Kun\Dashboard\Core\Application\Service\AddPasien\AddPasienService;
 use Kun\Dashboard\Core\Application\Service\AddUser\AddUserService;
 use Kun\Dashboard\Core\Application\Service\DeletePasien\DeletePasienService;
+use Kun\Dashboard\Core\Application\Service\EditCekKesehatan\EditCekKesehatanService;
 use Kun\Dashboard\Core\Application\Service\EditPasien\EditPasienService;
+use Kun\Dashboard\Core\Application\Service\FindCekKesehatanById\FindCekKesehatanByIdService;
 use Kun\Dashboard\Core\Application\Service\FindPasienById\FindPasienByIdService;
 use Kun\Dashboard\Core\Application\Service\FindUserById\FindUserByIdService;
 use Kun\Dashboard\Core\Application\Service\GetAllAnnouncement\GetAllAnnouncementService;
@@ -80,6 +82,14 @@ $di->set('addCekKesehatanService', function() use ($di) {
 
 $di->set('getAllCekKesehatanService', function() use ($di) {
     return new GetAllCekKesehatanService($di->get('sqlServerCekKesehatanRepository'));
+});
+
+$di->set('findCekKesehatanByIdService', function() use ($di) {
+    return new FindCekKesehatanByIdService($di->get('sqlServerCekKesehatanRepository'));
+});
+
+$di->set('editCekKesehatanService', function() use ($di) {
+    return new EditCekKesehatanService($di->get('sqlServerCekKesehatanRepository'));
 });
 
 //==========================

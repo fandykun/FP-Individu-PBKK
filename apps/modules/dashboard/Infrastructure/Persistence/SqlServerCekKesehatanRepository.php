@@ -70,13 +70,46 @@ class SqlServerCekKesehatanRepository implements CekKesehatanRepositoryInterface
 		return $cekKesehatans;
 	}
 
-	public function findCekKesehatanByUserId($userId) : ?CekKesehatan
+	public function findCekKesehatanByUserId(CekKesehatanId $id) : ?CekKesehatan
 	{
+		$sql = "SELECT * FROM cek_kesehatans WHERE id=:id";
+		$params = [
+			'id' => $id->id()
+		];
 
+		$result = $this->db->fetchOne($sql, \Phalcon\Db\Enum::FETCH_ASSOC, $params);
+
+		if($result) {
+			$cek = new CekKesehatan(
+				new CekKesehatanId($result['id']),
+				$result['user_id'],
+				$result['suhu_tubuh'],
+				$result['frekuensi_napas'],
+				$result['gejala_lain'],
+				$result['timestamp'],
+				$result['riwayat_perjalanan'],
+				$result['is_checked'],
+				$result['hasil']
+			);
+
+			return $cek;
+		}
+		
+		return null;
 	}
 
-	public function editCekKesehatan(CekKesehatan $cekKesehatan)
+	public function editCekKesehatan(CekKesehatanId $id,$is_checked, $hasil)
 	{
-		
+		$sql = "UPDATE cek_kesehatans SET is_checked=:is_checked, hasil=:hasil WHERE id=:id";
+
+		$params = [
+			'is_checked' => $is_checked,
+			'hasil' => $hasil,
+			'id' => $id->id()
+		];
+
+		$result = $this->db->execute($sql, $params);
+
+		return $result;
 	}
 }
