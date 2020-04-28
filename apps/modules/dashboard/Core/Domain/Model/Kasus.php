@@ -45,19 +45,4 @@ class Kasus
 	{
 		return $this->tahun;
 	}
-
-	public static function getAllJumlahByNama(array $kasuss)
-	{
-		$result = [];
-		foreach($kasuss as $kasus) {
-			if(!isset($result[$kasus->getNama()])) {
-				$result[$kasus->getNama()] = $kasus->getJumlah();
-			}
-			else {
-				$result[$kasus->getNama()] = $result[$kasus->getNama()] + $kasus->getJumlah();
-			}
-		}
-
-		return $result;
-	}
 }

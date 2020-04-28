@@ -3,7 +3,6 @@
 namespace Kun\Dashboard\Presentation\Web\Controller;
 
 use Kun\Dashboard\Core\Application\Service\GetCountKasus\GetCountKasusService;
-use Kun\Dashboard\Core\Domain\Model\Kasus;
 
 class IndexController extends BaseController
 {
@@ -23,12 +22,14 @@ class IndexController extends BaseController
 
 	public function indexAction()
 	{
-		$jumlahs = $this->getCountKasusService->execute();
+		$response = $this->getCountKasusService->execute();
 
-		$hasil = Kasus::getAllJumlahByNama($jumlahs);
+		$countByCategory = $response->getAllKasusByNama();
+		
+		$data = $response->getKasus();
 
-		$this->view->setVar('kasus', $jumlahs);
-		$this->view->setVar('jumlah', $hasil);
+		$this->view->setVar('kasus', $data);
+		$this->view->setVar('jumlah', $countByCategory);
 		$this->view->pick('home');
 	}
 }

@@ -13,7 +13,7 @@ class GetCountKasusService
 		$this->repository = $repository;
 	}
 
-	public function execute() : array
+	public function execute()
 	{
 		try {
 			$jumlahs = $this->repository->getCountKasus();
@@ -21,6 +21,6 @@ class GetCountKasusService
 			//throw $th;
 		}
 
-		return $jumlahs;
+		return new GetCountKasusResponse($jumlahs);
 	}
 }
