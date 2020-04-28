@@ -15,6 +15,7 @@ class IndexController extends BaseController
 	{
 		$this->setAnnouncementView();
 		$this->setAuthView();
+		$this->setCekKesehatanView();
 
 		$this->getCountKasusService = $this->getDI()->get('getCountKasusService');
 	}

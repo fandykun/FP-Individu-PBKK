@@ -10,9 +10,35 @@
 			<li class="nav-item active">
 				<a class="nav-link" href="{{ url('/') }}"><b>BERANDA</b></a>
 			</li>
+			
+			{% if cek is defined %}
+			<li class="nav-item"  data-toggle="modal" data-target="#modal-cek">
+				<a class="nav-link" href="#"><b>CEK KESEHATAN</b></a>
+			</li>
+
+				<!-- Modal -->
+				<div class="modal fade" id="modal-cek" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+						<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Hasil Pengecekan</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							{{ cek.getHasil() }}
+						</div>
+						</div>
+					</div>
+				</div>
+
+			{% else %}
 			<li class="nav-item">
 				<a class="nav-link" href="{{ url('/cek-kesehatan') }}"><b>CEK KESEHATAN</b></a>
 			</li>
+			{% endif %}
+
 			<li class="nav-item" data-toggle="modal" data-target="#modal-pengumuman">
 				<a class="nav-link" href="#"><b>PENGUMUMAN</b></a>
 			</li>

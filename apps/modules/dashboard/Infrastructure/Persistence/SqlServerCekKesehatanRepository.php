@@ -72,9 +72,10 @@ class SqlServerCekKesehatanRepository implements CekKesehatanRepositoryInterface
 
 	public function findCekKesehatanByUserId(CekKesehatanId $id) : ?CekKesehatan
 	{
-		$sql = "SELECT * FROM cek_kesehatans WHERE id=:id";
+		$sql = "SELECT * FROM cek_kesehatans WHERE id=:id OR user_id=:user_id";
 		$params = [
-			'id' => $id->id()
+			'id' => $id->id(),
+			'user_id' => $id->id()
 		];
 
 		$result = $this->db->fetchOne($sql, \Phalcon\Db\Enum::FETCH_ASSOC, $params);

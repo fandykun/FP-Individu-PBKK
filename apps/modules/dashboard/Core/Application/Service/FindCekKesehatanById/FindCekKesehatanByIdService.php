@@ -21,7 +21,7 @@ class FindCekKesehatanByIdService
 			$cek = $this->repository->findCekKesehatanByUserId(new CekKesehatanId($cekId));
 
 			if(!isset($cek)) {
-				throw new \Exception("Cek not found");
+				return null;
 			}
 		} catch(\Exception $e) {
 			throw $e;

@@ -2,6 +2,8 @@
 
 namespace Kun\Dashboard\Presentation\Web\Controller;
 
+use Kun\Dashboard\Core\Application\Service\FindCekKesehatanById\FindCekKesehatanByIdRequest;
+use Kun\Dashboard\Core\Application\Service\FindCekKesehatanById\FindCekKesehatanByIdService;
 use Kun\Dashboard\Core\Application\Service\GetAllProvince\GetAllProvinceService;
 use Kun\Dashboard\Core\Application\Service\GetAllStatusCovid19\GetAllStatusCovid19Service;
 use Kun\Dashboard\Core\Application\Service\GetLastAnnouncement\GetLastAnnouncementService;
@@ -43,6 +45,23 @@ class BaseController extends Controller
 		$status = $getAllStatusCovid19->execute();
 
 		$this->view->setVar('statusCovids', $status);
+	}
+
+	protected function setCekKesehatanView()
+	{
+		if($this->isLoggedIn()) {
+			$auth = $this->session->get('auth');
+			
+			/**
+			 * @var FindCekKesehatanByIdService
+			 */
+			$findCekKesehatanByIdService = $this->getDI()->get('findCekKesehatanByIdService');
+
+			$request = new FindCekKesehatanByIdRequest($auth['id']);
+			$cek = $findCekKesehatanByIdService->execute($request);
+
+			$this->view->setVar('cek', $cek);
+		}
 	}
 
 	protected function setAuthView()
