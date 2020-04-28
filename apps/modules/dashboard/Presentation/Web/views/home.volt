@@ -52,7 +52,11 @@
 <div class="row justify-content-center mb-3">
     <div class="col-3 col-sm-3 kartu kartu-ungu text-center">
         <h5>ODP</h5>
-        <h2>{{ jumlah['ODP'] }}</h2>
+        <h2>{% if jumlah['ODP'] is defined %}
+        {{ jumlah['ODP'] }}
+        {% else %}
+        0
+        {% endif %}</h2>
     </div>
     <div class="col-3 col-sm-3 kartu kartu-hijau text-center">
         <h5>PDP</h5>
@@ -60,24 +64,57 @@
     </div>
     <div class="col-3 col-sm-3 kartu kartu-merah text-center">
         <h5>Positif</h5>
-        <h2>{{ jumlah['Positif'] }}</h2>
+        <h2>{% if jumlah['Positif'] is defined %}
+        {{ jumlah['Positif'] }}
+        {% else %}
+        0
+        {% endif %}</h2>
     </div>
 </div>
 <div class="row justify-content-center mb-5">
     <div class="col-3 col-sm-3 kartu kartu-kuning text-center">
         <h5>Negatif</h5>
-        <h2>{{ jumlah['Negatif'] }}</h2>
+        <h2>{% if jumlah['Negatif'] is defined %}
+        {{ jumlah['Negatif'] }}
+        {% else %}
+        0
+        {% endif %}</h2>
     </div>
     <div class="col-3 col-sm-3 kartu kartu-biru text-center">
         <h5>Sembuh</h5>
-        <h2>{{ jumlah['Sembuh'] }}</h2>
+        <h2>{% if jumlah['Sembuh'] is defined %}
+        {{ jumlah['Sembuh'] }}
+        {% else %}
+        0
+        {% endif %} </h2>
     </div>
 </div>
 <div class="text-center">
-<h3>Grafik Blabla</h3>
+  <h3>Grafik COVID-19 di Indonesia</h3>
+  
+  <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary">Grafik Kenaikan Kasus Positif</h6>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+      <div class="chart-area">
+        <canvas id="myAreaChart"></canvas>
+      </div>
+    </div>
+  </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}
+<!-- Page level plugins -->
+<script src="{{ url('assets/sb-admin-2/vendor/chart.js/Chart.min.js') }}"></script>
 
+<!-- Page level custom scripts -->
+<script src="{{ url('assets/js/chart-area-demo.js') }}"></script>
+<script>
+
+</script>
 {% endblock %}

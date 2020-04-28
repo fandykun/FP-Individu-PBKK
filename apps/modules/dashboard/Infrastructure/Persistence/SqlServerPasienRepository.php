@@ -2,6 +2,7 @@
 
 namespace Kun\Dashboard\Infrastructure\Persistence;
 
+use Kun\Dashboard\Core\Domain\Model\Kasus;
 use Kun\Dashboard\Core\Domain\Model\Pasien;
 use Kun\Dashboard\Core\Domain\Model\PasienId;
 use Kun\Dashboard\Core\Domain\Model\StatusCovid19;
@@ -188,17 +189,25 @@ class SqlServerPasienRepository implements PasienRepositoryInterface
 
 	public function getCountKasus() : array
 	{
-		$sql = "SELECT COUNT(p.status_id) as total, sc.nama FROM status_covid19 sc
-			LEFT JOIN pasiens p
-			ON p.status_id = sc.id
-			GROUP BY sc.nama;";
+		$sql = "SELECT sc.nama as nama,COUNT(*) as jml, DAY(p.[timestamp]) as tanggal, MONTH(p.[timestamp] ) as bulan, YEAR(p.[timestamp] ) as tahun 
+		from pasiens p
+		LEFT JOIN status_covid19 sc ON sc.id = p.status_id 
+		GROUP BY DAY(p.[timestamp]), MONTH(p.[timestamp]), YEAR(p.[timestamp] ), sc.nama ;";
 
 		$results = $this->db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
 
 		$jumlahs = [];
 		if($results) {
 			foreach($results as $result) {
-				$jumlahs[$result['nama']] = $result['total'];
+				$hasil = new Kasus(
+					$result['nama'],
+					$result['jml'],
+					$result['tanggal'],
+					$result['bulan'],
+					$result['tahun']
+				);
+
+				array_push($jumlahs, $hasil);
 			}
 		}
 
