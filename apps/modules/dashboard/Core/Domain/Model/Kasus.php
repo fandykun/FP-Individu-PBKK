@@ -8,17 +8,13 @@ class Kasus
 
 	private int $jumlah;
 
-	private $tanggal;
-	private $bulan;
-	private $tahun;
+	private $waktu;
 
-	public function __construct($nama, $jumlah, $tanggal, $bulan, $tahun)
+	public function __construct($nama, $jumlah, $waktu)
 	{
 		$this->nama = $nama;
 		$this->jumlah = $jumlah;
-		$this->tanggal = $tanggal;
-		$this->bulan = $bulan;
-		$this->tahun = $tahun;
+		$this->waktu = $waktu;
 	}
 
 	public function getNama()
@@ -31,18 +27,16 @@ class Kasus
 		return $this->jumlah;
 	}
 
-	public function getTanggal()
+	public function getWaktu()
 	{
-		return $this->tanggal;
+		return $this->waktu;
 	}
 
-	public function getBulan()
+	public function getDateOnly()
 	{
-		return $this->bulan;
-	}
+		$dt = new \DateTime($this->waktu);
+		$date = $dt->format('d-M');
 
-	public function getTahun()
-	{
-		return $this->tahun;
+		return $date;
 	}
 }

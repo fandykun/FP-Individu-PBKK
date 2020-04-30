@@ -2,7 +2,10 @@
 
 namespace Kun\Dashboard\Presentation\Web\Controller;
 
+use DateTime;
+use Kun\Dashboard\Core\Application\Service\GetCountKasus\GetCountKasusResponse;
 use Kun\Dashboard\Core\Application\Service\GetCountKasus\GetCountKasusService;
+use Kun\Dashboard\Core\Application\Service\GetCountKasusByPlace\GetCountKasusByPlaceService;
 
 class IndexController extends BaseController
 {
@@ -11,6 +14,11 @@ class IndexController extends BaseController
 	 */
 	protected $getCountKasusService;
 
+	/**
+	 * @var GetCountKasusByPlaceService
+	 */
+	protected $getCountKasusByPlaceService;
+
 	public function initialize()
 	{
 		$this->setAnnouncementView();
@@ -18,18 +26,26 @@ class IndexController extends BaseController
 		$this->setCekKesehatanView();
 
 		$this->getCountKasusService = $this->getDI()->get('getCountKasusService');
+		$this->getCountKasusByPlaceService = $this->getDI()->get('getCountKasusByPlaceService');
 	}
 
 	public function indexAction()
 	{
+		/**
+		 * @var GetCountKasusResponse
+		 */
 		$response = $this->getCountKasusService->execute();
 
 		$countByCategory = $response->getAllKasusByNama();
-		
-		$data = $response->getKasus();
 
-		$this->view->setVar('kasus', $data);
+		$countPositifOnly = $response->getAllKasusPositif();
+
+		$countByPlace = $this->getCountKasusByPlaceService->execute();
+
+		$this->view->setVar('kasus', $countPositifOnly);
 		$this->view->setVar('jumlah', $countByCategory);
+		$this->view->setVar('tables', $countByPlace);
 		$this->view->pick('home');
 	}
+
 }

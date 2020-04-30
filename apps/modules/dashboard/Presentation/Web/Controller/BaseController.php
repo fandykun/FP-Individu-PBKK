@@ -84,7 +84,7 @@ class BaseController extends Controller
 	public function hasLoggedIn()
 	{
  		if($this->isLoggedIn()) {
-			return $this->response->redirect('dashboard');
+			return $this->response->redirect('/');
 		}
 	}
 
@@ -94,7 +94,7 @@ class BaseController extends Controller
 			$auth = $this->session->get('auth');
 
 			if($auth['role'] != 1) {
-				$this->response->redirect('dashboard');
+				$this->response->redirect('/');
 			}
 		}
 	}

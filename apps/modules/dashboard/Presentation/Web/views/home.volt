@@ -3,7 +3,8 @@
 {% block title %}Home{% endblock %}
 
 {% block styles %}
-
+  <!-- Custom styles for this page -->
+  <link href="{{ url('assets/sb-admin-2/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <style>
 .kartu {
   width: 300px;
@@ -106,6 +107,44 @@
   </div>
 </div>
 
+<div class="card shadow mb-4">
+  <div class="card-header py-3 d-sm-flex justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary">Data Kasus di Indonesia</h6>
+  </div>
+  <div class="card-body">
+      <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+          <tr>
+              <th>Jenis Kasus</th>
+              <th>Kabupaten</th>
+              <th>Provinsi</th>
+              <th>Jumlah</th>
+          </tr>
+          </thead>
+          <tfoot>
+          <tr>
+              <th>Jenis Kasus</th>
+              <th>Kabupaten</th>
+              <th>Provinsi</th>
+              <th>Jumlah</th>
+          </tr>
+          </tfoot>
+          <tbody>
+          {% for table in tables %}
+          <tr>
+              <td>{{ table['nama_status'] }}</td>
+              <td>{{ table['nama_kabupaten'] }}</td>
+              <td>{{ table['nama_provinsi'] }}</td>
+              <td>{{ table['jumlah'] }}</td>
+          </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+      </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -114,19 +153,34 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ url('assets/js/chart-area-demo.js') }}"></script>
+
+  <!-- Page level plugins -->
+  <script src="{{ url('assets/sb-admin-2/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url('assets/sb-admin-2/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{{ url('assets/sb-admin-2/js/demo/datatables-demo.js') }}"></script>
+
 <script>
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 
-var tanggal = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+// var tanggal = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 var bulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
+
+var tanggal = [];
+var jumlahKasus = [];
+{% for key,value in kasus %}
+tanggal.push('{{ key }}');
+jumlahKasus.push({{ value }});
+{% endfor %}
 
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: bulan,
+    labels: tanggal,
     datasets: [{
-      label: "Earnings",
+      label: "Positif",
       lineTension: 0.3,
       backgroundColor: "rgba(255, 0, 0, 0.05)",
       borderColor: "rgba(255, 0, 0, 1)",
@@ -138,7 +192,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(255, 0, 0, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: jumlahKasus,
     }],
   },
   options: {
@@ -158,7 +212,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return number_format(value);
           }
         },
         gridLines: {
@@ -190,7 +244,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + number_format(tooltipItem.yLabel);
         }
       }
     }

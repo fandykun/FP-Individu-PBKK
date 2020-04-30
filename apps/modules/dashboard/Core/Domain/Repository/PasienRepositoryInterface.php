@@ -19,4 +19,6 @@ interface PasienRepositoryInterface
 	public function deletePasien(PasienId $id);
 
 	public function getCountKasus() : array;
+
+	public function getCountKasusByPlace() : array;
 }

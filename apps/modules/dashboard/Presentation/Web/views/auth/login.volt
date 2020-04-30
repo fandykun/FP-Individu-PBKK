@@ -10,7 +10,7 @@
     Selamat Datang
   </span>
   <span class="login100-form-title p-b-48">
-    <i class="zmdi zmdi-font"></i>
+
   </span>
   <p>{{ this.flashSession.output() }}</p>
   <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">

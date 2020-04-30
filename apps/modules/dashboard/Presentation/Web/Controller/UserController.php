@@ -30,7 +30,7 @@ class UserController extends BaseController
 	{
 		$this->authorized();
 
-		return $this->view->pick('dashboard');
+		return $this->view->pick('/');
 	}
 
 	public function addAction()

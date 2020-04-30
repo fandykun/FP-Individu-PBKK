@@ -189,10 +189,11 @@ class SqlServerPasienRepository implements PasienRepositoryInterface
 
 	public function getCountKasus() : array
 	{
-		$sql = "SELECT sc.nama as nama,COUNT(*) as jml, DAY(p.[timestamp]) as tanggal, MONTH(p.[timestamp] ) as bulan, YEAR(p.[timestamp] ) as tahun 
+		$sql = "SELECT sc.nama as nama,COUNT(*) as jumlah, CONVERT(datetime, p.[timestamp], 103) as waktu
 		from pasiens p
 		LEFT JOIN status_covid19 sc ON sc.id = p.status_id 
-		GROUP BY DAY(p.[timestamp]), MONTH(p.[timestamp]), YEAR(p.[timestamp] ), sc.nama ;";
+		GROUP BY CONVERT(datetime, p.[timestamp], 103), sc.nama
+		ORDER BY CONVERT(datetime, p.[timestamp], 103) ASC;";
 
 		$results = $this->db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
 
@@ -201,10 +202,8 @@ class SqlServerPasienRepository implements PasienRepositoryInterface
 			foreach($results as $result) {
 				$hasil = new Kasus(
 					$result['nama'],
-					$result['jml'],
-					$result['tanggal'],
-					$result['bulan'],
-					$result['tahun']
+					$result['jumlah'],
+					$result['waktu']
 				);
 
 				array_push($jumlahs, $hasil);
@@ -212,5 +211,26 @@ class SqlServerPasienRepository implements PasienRepositoryInterface
 		}
 
 		return $jumlahs;
+	}
+
+	public function getCountKasusByPlace() : array
+	{
+		$sql = "SELECT count(a.status_id) as jumlah, a.nama_status, a.nama_kabupaten, a.nama_provinsi FROM (
+			SELECT pasiens.*, 
+				status_covid19.nama as nama_status, 
+				districts.name as nama_kecamatan,
+				regencies.name as nama_kabupaten,
+				provinces.name as nama_provinsi
+			FROM pasiens 
+			LEFT JOIN status_covid19 ON pasiens.status_id = status_covid19.id
+			LEFT JOIN districts ON pasiens.district_id = districts .id 
+			LEFT JOIN regencies ON districts.regency_id = regencies.id
+			LEFT JOIN provinces ON provinces.id = regencies.province_id
+		) a
+		GROUP BY a.nama_kabupaten, a.nama_status, a.nama_provinsi;";
+
+		$results = $this->db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
+
+		return $results;
 	}
 }
