@@ -59,6 +59,13 @@ $router->addGet('/admin', [
     'action' => 'index'
 ]);
 
+$router->addPost('/admin/user/rolesubmit', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'admin',
+    'action' => 'setAdmin'
+]);
+
 //=================
 //-----Announcement
 //=================

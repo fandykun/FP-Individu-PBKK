@@ -23,7 +23,8 @@ class EditUserService
 				new UserId($request->getUserId()),
 				$request->getUsername(),
 				$request->getEmail(),
-				new Password($request->getPassword())
+				new Password($request->getPassword()),
+				$request->getRole()
 			);
 
 			$this->userRepository->editUser($user);

@@ -7,6 +7,7 @@ use Kun\Dashboard\Core\Application\Service\AddUser\AddUserService;
 use Kun\Dashboard\Core\Application\Service\DeletePasien\DeletePasienService;
 use Kun\Dashboard\Core\Application\Service\EditCekKesehatan\EditCekKesehatanService;
 use Kun\Dashboard\Core\Application\Service\EditPasien\EditPasienService;
+use Kun\Dashboard\Core\Application\Service\EditUser\EditUserService;
 use Kun\Dashboard\Core\Application\Service\FindCekKesehatanById\FindCekKesehatanByIdService;
 use Kun\Dashboard\Core\Application\Service\FindPasienById\FindPasienByIdService;
 use Kun\Dashboard\Core\Application\Service\FindUserById\FindUserByIdService;
@@ -15,6 +16,7 @@ use Kun\Dashboard\Core\Application\Service\GetAllCekKesehatan\GetAllCekKesehatan
 use Kun\Dashboard\Core\Application\Service\GetAllPasien\GetAllPasienService;
 use Kun\Dashboard\Core\Application\Service\GetAllProvince\GetAllProvinceService;
 use Kun\Dashboard\Core\Application\Service\GetAllStatusCovid19\GetAllStatusCovid19Service;
+use Kun\Dashboard\Core\Application\Service\GetAllUser\GetAllUserService;
 use Kun\Dashboard\Core\Application\Service\GetCountKasus\GetCountKasusService;
 use Kun\Dashboard\Core\Application\Service\GetCountKasusByPlace\GetCountKasusByPlaceService;
 use Kun\Dashboard\Core\Application\Service\GetDistricts\GetDistrictsService;
@@ -35,6 +37,14 @@ $di->set('loginUserService', function() use ($di) {
 
 $di->set('addUserService', function() use ($di) {
     return new AddUserService($di->get('sqlServerUserRepository'));
+});
+
+$di->set('getAllUserService', function() use ($di) {
+    return new GetAllUserService($di->get('sqlServerUserRepository'));
+});
+
+$di->set('editUserService', function() use ($di) {
+    return new EditUserService($di->get('sqlServerUserRepository'));
 });
 
 //=========================

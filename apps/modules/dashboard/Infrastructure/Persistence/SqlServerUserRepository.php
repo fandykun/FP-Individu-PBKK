@@ -56,7 +56,30 @@ class SqlServerUserRepository implements UserRepositoryInterface
 		}
 
 		return null;
-		
+	}
+
+	public function getAllUser() : array
+	{
+		$sql = "SELECT * FROM users";
+
+		$results = $this->db->fetchAll($sql, \Phalcon\Db\Enum::FETCH_ASSOC);
+
+		$users = [];
+		if($results) {
+			foreach($results as $result) {
+				$user = new User(
+					new UserId($result['user_id']),
+					$result['username'],
+					$result['email'],
+					new Password($result['password']),
+					$result['role']
+				);
+
+				array_push($users, $user);
+			}
+		}
+
+		return $users;
 	}
 
 	public function LoginUser(string $key, string $password) : ?User
@@ -90,15 +113,16 @@ class SqlServerUserRepository implements UserRepositoryInterface
 
 	public function editUser(User $user)
 	{
-		$sql = "UPDATE users SET username=:username, email=:email, password=:password WHERE user_id=:user_id";
+		$sql = "UPDATE users SET username=:username, email=:email, [role]=:role, password=:password WHERE user_id=:user_id";
 		$params = [
 			'username' => $user->getUsername(),
 			'email' => $user->getEmail(),
 			'password' => $user->getPassword()->toString(),
-			'user_id' => $user->getUserId()->id()
+			'user_id' => $user->getUserId()->id(),
+			'role' => $user->getRole()
 		];
 
-		$result = $this->db->execute($sql, \Phalcon\Db\Enum::FETCH_ASSOC, $params);
+		$result = $this->db->execute($sql, $params);
 
 		return $result;
 	}
